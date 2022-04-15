@@ -17,4 +17,4 @@ hello <- function() {
   print("Hello, world!")
 }
 
-`%dopar%` <- foreach::`%dopar%`
+#`%dopar%` <- foreach::`%dopar%`

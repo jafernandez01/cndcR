@@ -1,7 +1,7 @@
 
 # load data from Ciampitti et al. (2022) for a case-study on maize
 # First, convert kg to Mg, renaming variables, calculate Na from Nupt values, and filter data above 1Mgha-1 until 25d after R1
-Data <- read_xlsx(here("data-raw","maize_dataset.xlsx"), sheet = 1)   %>%
+Data <- read_xlsx(here("maize_dataset.xlsx"), sheet = 1)   %>%
   mutate(W = W_kg_ha*.001, Site_year = paste(Id ,Year, Sites, sep= "_"))   %>%  #
   dplyr::rename(Na = `N(%)`, Samp = `Sampling time`, Nrates = Nrates_kg_ha)   %>%
   mutate(Na = if_else(!is.na(Na), Na, 100*Nupt_kg_ha/W_kg_ha ))   %>%
@@ -33,7 +33,7 @@ Data <- Data  %>%
 
 
 # load data of reviewed published studies on CNDC
-biblioCNDC <- read_excel(here("data-raw","bibliographic_dataset.xlsx"),
+biblioCNDC <- read_xlsx(here("bibliographic_dataset.xlsx"),
                          col_types = c("skip", "text", "numeric", "text",
                                        "text", "text", "numeric", "numeric",
                                        "numeric", "numeric","text", "text",
@@ -43,5 +43,7 @@ biblioCNDC <- read_excel(here("data-raw","bibliographic_dataset.xlsx"),
 
 
 # save the data
-save(Data, file = here('data', 'maize_data_processed.RData'))
-save(biblioCNDC, file = here('data', 'bibliographic_data_processed.RData'))
+usethis::use_data(biblioCNDC, overwrite = TRUE)
+usethis::use_data(Data, overwrite = TRUE)
+#save(Data, file = here('data', 'maize_data_processed.RData'))
+#save(biblioCNDC, file = here('data', 'bibliographic_data_processed.RData'))
