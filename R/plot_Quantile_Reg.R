@@ -1,4 +1,4 @@
-#' @importFrom nlraa SSlinp
+
 # Regression: minW vs. b coefficient
 
 #m_a1 = lm(A2 ~ minW, data = biblioCNDC)
