@@ -3,8 +3,8 @@
 
 #m_a1 = lm(A2 ~ minW, data = biblioCNDC)
 data("biblioCNDC")
-
-m_a2 = quantreg::nlrq(A2 ~ nlraa::SSlinp(minW, a ,b,xs), data = biblioCNDC, tau = 0.05 )
+biblioCNDC <- biblioCNDC %>% dplyr::rename(A2 = b)
+m_a2 = quantreg::nlrq(A2 ~ SSlinp(minW, a ,b,xs), data = biblioCNDC, tau = 0.05 )
 ndat_a2 = expand.grid(minW = seq(min(biblioCNDC$minW, na.rm = T), max(biblioCNDC$minW, na.rm = T), 0.1))
 ndat_a2$preds = quantreg::predict(m_a2, newdata = ndat_a2)
 
