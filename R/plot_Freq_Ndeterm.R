@@ -1,8 +1,8 @@
 
 ## Laboratory method
 figFreq_Ndeterm <- biblioCNDC %>%
-  drop_na(nMethod) %>%
-  ggplot(aes(x = forcats::fct_infreq(nMethod) ) ) +
+  drop_na(NLabMethod) %>%
+  ggplot(aes(x = forcats::fct_infreq(NLabMethod) ) ) +
   geom_bar(color = "#3d3c3c") +
   geom_text(stat='count', aes(label=..count..), vjust=-0.3, fontface = 3) +
 
