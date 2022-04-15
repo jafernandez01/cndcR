@@ -89,7 +89,7 @@ job::job({
 # used here was either all data with reported variance (*n* = 254) or the same data after the W~max~ testing
 # procedure was applied (*n* = 200).
 
-dataSens_5 <- dataSens_5 |> filter_at(.vars = vars(Na_SE, W_SE), .vars_predicate = all_vars(!is.na(.)))
+dataSens_5 <- Data |> filter_at(.vars = vars(Na_SE, W_SE), .vars_predicate = all_vars(!is.na(.)))
 
 dataSens_4and5 <- list(
   dataSens_4 |>

@@ -144,7 +144,7 @@ fdataSens_3 <- foreach(i = seq(1, 6, 1)) %dopar% { # for all the different no.sa
       Samp = stringr::str_replace(Parameter, ".*\\[(\\d{1,2})\\]$", "\\1"),
       Parameter = stringr::str_remove(Parameter, "\\[\\d{1,2}\\]$")
     ) |>
-    mice::filter(Parameter %in% c("A1", "A2"))
+    dplyr::filter(Parameter %in% c("A1", "A2"))
 }
 
 fdataSens_3 <- bind_rows(fdataSens_3) |> # extract summary statistics of the posteriors
@@ -152,3 +152,7 @@ fdataSens_3 <- bind_rows(fdataSens_3) |> # extract summary statistics of the pos
   dplyr::summarise(lowCI = quantile(Value, 0.025), uppCI = quantile(Value, 0.975), mean = mean(Value))
 
 parallel::stopCluster(cl)
+
+# save the data
+save(fdataSens_3, file = here('data', 'fdataSens_3.RData'))
+

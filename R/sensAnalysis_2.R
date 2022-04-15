@@ -147,3 +147,6 @@ fdataSens_2 <- bind_rows(fdataSens_2) |> # extract summary statistics of the pos
   dplyr::summarise(lowCI = quantile(Value, 0.025), uppCI = quantile(Value, 0.975), mean = mean(Value))
 
 parallel::stopCluster(cl)
+
+# save the data
+save(fdataSens_2, file = here('data', 'fdataSens_2.RData'))

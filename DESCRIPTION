@@ -24,6 +24,13 @@ Imports:
     metrica,
     stringr,
     ggplot2,
-    purrr
+    purrr,
+    ggsci,
+    ggdist,
+    gghalves,
+    quantreg,
+    nlraa
 Suggests: 
     knitr
+Depends: 
+    R (>= 2.10)
