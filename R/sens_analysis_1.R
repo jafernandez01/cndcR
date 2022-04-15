@@ -10,14 +10,13 @@ for (i in c(1, 2, 3, 5, 8, 13, 21, 34)) {
 
 dataSens_1 <- dataSens_1 |> discard(is.null)
 
-job::job(
-  {
+job::job({
     cl <- parallel::makeCluster(parallel::detectCores()[1] - 1) # the no. of cores - 1, to avoid overloading
     doParallel::registerDoParallel(cl)
 
     set.seed(500)
     bootSamp_1 <- NULL
-    bootSamp_1 <- foreach(i = seq(1, 8, 1), .verbose = T) %dopar% {
+    bootSamp_1 <- foreach::foreach(i = seq(1, 8, 1), .verbose = T) %dopar% {
 
       # Specify parameters and JAGS settings
       parameters <- c("A1", "A2", "Bmax", "S", "Nc")
@@ -95,8 +94,43 @@ model {
     }
 
   parallel::stopCluster(cl)
-  },
-import = "auto",
-title = "mcmc_no.studies"
-)
+  }, import = "auto", title = "mcmc_no.studies" )
+
+
+# Posterior probability distributions of *a* and *b* parameters are extracted for each bootstrapped sample (i.e., extracting a total of 100 probability distributions).
+# These distributions are then being averaged to obtain posterior medians and credibility intervals from all the samples.
+# Parallel computation is being used for this part of the code.
+
+# The effect of the sample size (i.e., number of experimental trials) on the posterior medians was analyzed via the relative bias and uncertainty over the full model.
+# Figures **2b-c** are obtained using ggplot:: library.
+
+cl <- parallel::makeCluster(parallel::detectCores()[1] - 1) # the no. of cores - 1, to avoid overloading
+doParallel::registerDoParallel(cl)
+
+# Obtain final data_frame with posteriors for a and b
+fdataSens_1 <- foreach::foreach(i = seq(1, 8, 1)) %dopar% { # for all the different no.studies sizes tested
+
+  purrr::map2_dfr(
+    bootSamp_1[[i]], seq(1, 100, 1), # map the extraction of parameters within the bootstrap samples
+    ~ .x |>
+      as.data.frame() |>
+      dplyr::mutate(Imp = .y) |>
+      tidyr::pivot_longer(-Imp, names_to = "Parameter", values_to = "Value")
+  ) |>
+    dplyr::mutate(
+      Method = paste("Boot", i, sep = ""),
+      Samp = stringr::str_replace(Parameter, ".*\\[(\\d{1,2})\\]$", "\\1"),
+      Parameter = stringr::str_remove(Parameter, "\\[\\d{1,2}\\]$")
+    ) |>
+    dplyr::filter(Parameter %in% c("A1", "A2"))
+}
+
+fdataSens_1 <- bind_rows(fdataSens_1) |> # extract summary statistics of the posteriors for a and b (A1 and A2)
+  dplyr::group_by(Parameter, Method) |>
+  dplyr::summarise(lowCI = quantile(Value, 0.025), uppCI = quantile(Value, 0.975), mean = mean(Value))
+
+parallel::stopCluster(cl)
+
+# save the data
+save(fdataSens_1, file = here('data', 'fdataSens_1.RData'))
 

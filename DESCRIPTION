@@ -23,6 +23,7 @@ Imports:
     parallel,
     metrica,
     stringr,
-    ggplot
+    ggplot2,
+    purrr
 Suggests: 
     knitr
