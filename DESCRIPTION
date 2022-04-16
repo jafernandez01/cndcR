@@ -14,13 +14,9 @@ Imports:
     readxl,
     dplyr,
     magrittr,
-    here,
-    job,
     rjags,
     mcp,
     foreach,
-    doParallel,
-    parallel,
     metrica,
     stringr,
     ggplot2,
@@ -29,6 +25,7 @@ Imports:
     ggdist,
     gghalves,
     quantreg,
+    forcats,
     nlraa
 Depends: 
     R (>= 2.10)

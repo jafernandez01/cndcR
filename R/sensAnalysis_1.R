@@ -1,8 +1,17 @@
-
-#' # 1st sensitivity analysis: *number of experiments*
-#' Bootstrap procedure in which *n* (where *n* = 1, 2, 3, 5, 8, 13, 21, and 34) number of studies of our database are sampled 100 times with replacement to create 100 new datasets.
+#' @name sensAnalysis_1
+#' @title
+#' First sensitivity analysis
+#' @details
+#' See 'Examples' for the source code to obtain the given results. Briefly, a bootstrap procedure in which studies with n
+#' (where *n* = 1, 2, 3, 5, 8, 13, 21, and 34) number of studies of our database are sampled 100 times with replacement to create 100 new datasets.
+#' The Bayesian hierarchical model explained by Makowski et al. (2020) was fitted to each bootstrapped sample.
+#' @description
+#' This function returns results from the 1st sensitivity analysis in Fernandez et al.(2022): number of experiments.
+#' Output is a tibble with posterior expectations and credibility intervals of a (A1) and b (A2) parameters of the CNDC.
 #'
-#' @function
+#' @note Parallel computation is recommended if running the example code.
+#'
+#' @examples
 #' \dontrun{
 #'
 #' data("Data")
@@ -15,7 +24,10 @@
 #'
 #' dataSens_1 <- dataSens_1 |> discard(is.null)
 #'
-#'
+#' # Parameters and JAGS settings are defined for the MCMC (Markov Chain Monte Carlo) procedure to model the power function
+#' # of CNDC across sampling dates. Weakly-informative priors were defined following Makowski et al. (2020) and Ciampitti
+#' # et al. (2021). To facilitate computation of the sensitivity analyses, the algorithm was run with three chains of 20,000
+#' # iterations each (10,000 discarded as tuning and burn-in periods). The statistical model was fitted using the rjags:: library.
 #'
 #'     set.seed(500)
 #'     bootSamp_1 <- NULL
@@ -96,20 +108,14 @@
 #'     bootSamp_1[[i]] <- mcmcChain_1
 #'     }
 #'
+#' # Posterior probability distributions of *a* and *b* parameters are extracted for each bootstrapped sample
+#' # (i.e., extracting a total of 100 probability distributions). These distributions are then being averaged
+#' # to obtain posterior medians and credibility intervals from all the samples.
 #'
-#'
-#' # Posterior probability distributions of *a* and *b* parameters are extracted for each bootstrapped sample (i.e., extracting a total of 100 probability distributions).
-#' # These distributions are then being averaged to obtain posterior medians and credibility intervals from all the samples.
-#' # Parallel computation is being used for this part of the code.
-#'
-#' # The effect of the sample size (i.e., number of experimental trials) on the posterior medians was analyzed via the relative bias and uncertainty over the full model.
-#' # Figures **2b-c** are obtained using ggplot:: library.
-#'
-#' # Obtain final data_frame with posteriors for a and b
-#' fdataSens_1 <- foreach::foreach(i = seq(1, 8, 1)) %dopar% { # for all the different no.studies sizes tested
+#' fdataSens_1 <- foreach::foreach(i = seq(1, 8, 1)) %do% {
 #'
 #'   purrr::map2_dfr(
-#'     bootSamp_1[[i]], seq(1, 100, 1), # map the extraction of parameters within the bootstrap samples
+#'     bootSamp_1[[i]], seq(1, 100, 1),
 #'     ~ .x |>
 #'       as.data.frame() |>
 #'       dplyr::mutate(Imp = .y) |>
@@ -123,15 +129,12 @@
 #'     dplyr::filter(Parameter %in% c("A1", "A2"))
 #' }
 #'
-#' fdataSens_1 <- bind_rows(fdataSens_1) |> # extract summary statistics of the posteriors for a and b (A1 and A2)
+#' fdataSens_1 <- bind_rows(fdataSens_1) |>
 #'   dplyr::group_by(Parameter, Method) |>
 #'   dplyr::summarise(lowCI = quantile(Value, 0.025), uppCI = quantile(Value, 0.975), mean = mean(Value))
-#'
-#'
-#' # save the data
-#' save(fdataSens_1, file = here('data', 'fdataSens_1.RData'))
 #' }
 NULL
 
-data("fdataSens_1")
-fdataSens_1
+sensAnalysis_1 <- function() {
+  return(cndcR:::fdataSens_1)
+}

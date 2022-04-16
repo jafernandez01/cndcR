@@ -1,12 +1,12 @@
-#' @name sensAnalysis_2
+#' @name sensAnalysis_3
 #' @title
-#' Second sensitivity analysis
+#' Third sensitivity analysis
 #' @details
-#' See 'Examples' for the source code to obtain the given results. Briefly, a bootstrap procedure in which studies with r
-#' (where r = 2, 3, 4, 5, and 6) number of N rates are sampled 100 times with replacement to create 100 new datasets.
+#' See 'Examples' for the source code to obtain the given results. Briefly, a bootstrap procedure in which studies with s
+#' (where s = 1, 2, 3, 4, 5, and 6) number of samplings are sampled 100 times with replacement to create 100 new datasets.
 #' The Bayesian hierarchical model explained by Makowski et al. (2020) was fitted to each bootstrapped sample.
 #' @description
-#' This function returns results from the 2nd sensitivity analysis in Fernandez et al.(2022): number of N rates.
+#' This function returns results from the 3rd sensitivity analysis in Fernandez et al.(2022): number of sampling times.
 #' Output is a tibble with posterior expectations and credibility intervals of a (A1) and b (A2) parameters of the CNDC.
 #'
 #' @note Parallel computation is recommended if running the example code.
@@ -17,13 +17,13 @@
 #' data("Data")
 #'
 #' set.seed(500)
-#' dataSens_2 <- NULL
-#' for (i in seq(1, 5, 1)) {
-#'   dataSens_2[[i]] <- replicate(100, Data |>
+#' dataSens_3 <- NULL
+#' for (i in seq(1, 6, 1)) {
+#'   dataSens_3[[i]] <- replicate(100, Data |>
 #'                                  group_by(Site_year) |>
-#'                                  dplyr::filter(length(unique(Nrates)) > 5) |>
+#'                                  filter(length(unique(Samp)) > 5) |>
 #'                                  nest() |>
-#'                                  mutate(sample = purrr::map(data, ~ dplyr::filter(.x, Nrates <= 30 | Nrates %in% sample(unique(dplyr::filter(.x, Nrates > 30)$Nrates), i, replace = F)))) |>
+#'                                  mutate(sample = purrr::map(data, ~ filter(.x, Samp %in% sample(unique(.x$Samp), i, replace = F)))) |>
 #'                                  unnest(sample), simplify = F)
 #' }
 #'
@@ -33,8 +33,8 @@
 #' # iterations each (10,000 discarded as tuning and burn-in periods). The statistical model was fitted using the rjags:: library.
 #'
 #'     set.seed(500)
-#'     bootSamp_2 <- NULL
-#'     bootSamp_2 <- foreach::foreach(i = seq(1, 5, 1), .verbose = T) %do% {
+#'     bootSamp_3 <- NULL
+#'     bootSamp_3 <- foreach(i = seq(1, 6, 1), .verbose = T) %do% {
 #'
 #'       # Specify parameters and JAGS settings
 #'       parameters <- c("A1", "A2", "Bmax", "S", "Nc")
@@ -46,13 +46,13 @@
 #'       thinSteps <- 10 # number of steps to "thin" (keep every 10 steps)
 #'       nIter <- 10000 # steps per chain
 #'
-#'       mcmcChain_2 <- NULL
+#'       mcmcChain_3 <- NULL
 #'       for (d in seq(1, 100, 1)) {
-#'         Date <- as.numeric(as.factor(paste(dataSens_2[[i]][[d]]$Site_year, "_", dataSens_2[[i]][[d]]$Samp, sep = "")))
+#'         Date <- as.numeric(as.factor(paste(dataSens_3[[i]][[d]]$Site_year, "_", dataSens_3[[i]][[d]]$Samp, sep = "")))
 #'
 #'         dataList <- list(
-#'           "W" = dataSens_2[[i]][[d]]$W,
-#'           "N" = dataSens_2[[i]][[d]]$Na,
+#'           "W" = dataSens_3[[i]][[d]]$W,
+#'           "N" = dataSens_3[[i]][[d]]$Na,
 #'           "Date" = Date,
 #'           "Q" = length(Date),
 #'           "K" = length(unique(Date))
@@ -89,7 +89,7 @@
 #' }
 #' ")
 #'         set.seed(500)
-#'         jagsModel_2 <- rjags::jags.model(m,
+#'         jagsModel_3 <- rjags::jags.model(m,
 #'                                          data = dataList,
 #'                                          n.chains = nChains,
 #'                                          n.adapt = adaptSteps
@@ -97,28 +97,29 @@
 #'         close(m)
 #'
 #'         if (burnInSteps > 0) {
-#'           update(jagsModel_2, n.iter = burnInSteps)
+#'           update(jagsModel_3, n.iter = burnInSteps)
 #'         }
-#'         codaSamples_2 <- rjags::coda.samples(jagsModel_2,
+#'         codaSamples_3 <- rjags::coda.samples(jagsModel_3,
 #'                                              variable.names = parameters,
 #'                                              n.iter = nIter,
 #'                                              thin = thinSteps
 #'         )
-#'         mcmcChain_2[[d]] <- as.matrix(codaSamples_2)
+#'         mcmcChain_3[[d]] <- as.matrix(codaSamples_3)
 #'       }
 #'
 #'
-#'     bootSamp_2[[i]] <- mcmcChain_2
+#'     bootSamp_3[[i]] <- mcmcChain_3
 #'     }
+#'
 #'
 #' # Posterior probability distributions of *a* and *b* parameters are extracted for each bootstrapped sample
 #' # (i.e., extracting a total of 100 probability distributions). These distributions are then being averaged
 #' # to obtain posterior medians and credibility intervals from all the samples.
 #'
-#' fdataSens_2 <- foreach::foreach(i = seq(1, 5, 1)) %do% {
+#' fdataSens_3 <- foreach(i = seq(1, 6, 1)) %do% {
 #'
 #'   purrr::map2_dfr(
-#'     bootSamp_2[[i]], seq(1, 100, 1),
+#'     bootSamp_3[[i]], seq(1, 100, 1),
 #'     ~ .x |>
 #'       as.data.frame() |>
 #'       dplyr::mutate(Imp = .y) |>
@@ -132,12 +133,13 @@
 #'     dplyr::filter(Parameter %in% c("A1", "A2"))
 #' }
 #'
-#' fdataSens_2 <- bind_rows(fdataSens_2) |>
+#' fdataSens_3 <- bind_rows(fdataSens_3) |>
 #'   dplyr::group_by(Parameter, Method) |>
 #'   dplyr::summarise(lowCI = quantile(Value, 0.025), uppCI = quantile(Value, 0.975), mean = mean(Value))
+#'
 #' }
 NULL
 
-sensAnalysis_2 <- function() {
-  return(cndcR:::fdataSens_2)
+sensAnalysis_3 <- function() {
+  return(cndcR:::fdataSens_3)
 }

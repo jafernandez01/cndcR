@@ -1,9 +1,14 @@
+#' @name fig4b
+#' @title
+#' Plot figure 4b from Fernandez et al. (2022)
+#' @description
+#' This function returns figure 4b in Fernandez et al.(2022): Frequency distribution of reported low W criteria for fitting CNDC
+#' in literature.
 
-## Pre-processing step applied
-data("biblioCNDC")
+fig4b <- function() {
 
-figFreq_lowWcriteria <- biblioCNDC %>%
-  mutate(preProcess = if_else(preProcess == "NA", NA_character_, as.character(preProcess) ),
+  figFreq_lowWcriteria <- cndcR::biblioCNDC %>%
+  dplyr::mutate(preProcess = if_else(preProcess == "NA", NA_character_, as.character(preProcess) ),
          preProcess = if_else(is.na(preProcess), "NO", as.character(preProcess) )) |>
 
   drop_na(preProcess) %>%
@@ -21,13 +26,14 @@ figFreq_lowWcriteria <- biblioCNDC %>%
         panel.background = element_rect(fill = "#f5f5f5"),
         panel.border = element_rect(colour = "black", fill = NA),
 
-
         text = element_text(size = 13),
         legend.title = element_blank(),
         legend.position = c(0.8,0.8),
         legend.background = element_blank(),
-        #title = element_text(size = 11),
 
         axis.ticks.length=unit(-0.15, "cm"),
         axis.text.x = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm")),
         axis.text.y = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm"), size = 13))
+
+  return(figFreq_lowWcriteria)
+}
