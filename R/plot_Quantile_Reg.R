@@ -5,9 +5,8 @@
 #' This function returns figure 4c in Fernandez et al.(2022): Regression: minW vs. b coefficient of the CNDC.
 
 library(nlraa, include.only = 'SSlinp')
-data("biblioCNDC")
 
-biblioCNDC <- biblioCNDC %>% dplyr::rename(A2 = b)
+biblioCNDC <- cndcR::biblioCNDC %>% dplyr::rename(A2 = b)
 
 #m_a1 = lm(A2 ~ minW, data = biblioCNDC) # tested both a linear vs linear plateau
 m_a2 <- quantreg::nlrq(A2~SSlinp(minW, a ,b,xs) , data = biblioCNDC, tau = 0.05 )

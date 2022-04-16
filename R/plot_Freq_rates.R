@@ -1,9 +1,13 @@
+#' @name fig3a
+#' @title
+#' Plot figure 3a from Fernandez et al. (2022)
+#' @description
+#' This function returns figure 3a in Fernandez et al.(2022): Frequency distribution of number of N-rates used for fitting CNDC
+#' in literature.
 
-# Freq. histograms
-## No. N-rates
-data("biblioCNDC")
+fig3a <- function() {
 
-figFreq_rates <- biblioCNDC %>%
+  figFreq_rates <- cndcR::biblioCNDC %>%
   mutate(min = as.numeric(sub("to.*","",nRates)),
          max = as.numeric(sub(".*to","",nRates)),
          range = max - min) %>%
@@ -34,3 +38,6 @@ figFreq_rates <- biblioCNDC %>%
         axis.ticks.length=unit(-0.15, "cm"),
         axis.text.x = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm")),
         axis.text.y = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm"), size = 13))
+
+  return(figFreq_rates)
+}

@@ -1,8 +1,16 @@
+#' @name fig5b_c
+#' @title
+#' Plot figure 5b and 5c from Fernandez et al. (2022)
+#' @description
+#' This function returns figure 5b and 5c in Fernandez et al.(2022): SHistograms and density plots of the
+#' posterior distributions for a (A1) and b (A2) parameters of the critical nitrogen dilution curve (CNDC)
+#' of maize using four types of datasets: (i) All data or (ii) only Wmax plateau achieved data, and
+#' (iii) unweighted or (iv) variance-weighted data.
 
-data("fdataSens_4and5")
+fig5b_c <- function() {
 
 # Figures 5b-c for sensitivity analysis ----------------------
-figSens_4and5 <- fdataSens_4and5  %>%
+  figSens_4and5 <- cndcR:::fdataSens_4and5  %>%
   ggplot(aes(x = Value, fill = Method, color = Method)) +
   geom_histogram(aes(y = ..density..), alpha = 0.5, position = "identity") +
   geom_density(alpha = .2) +
@@ -31,3 +39,7 @@ figSens_4and5 <- fdataSens_4and5  %>%
     axis.text.x = element_text(margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")),
     axis.text.y = element_text(margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"), size = 13)
   )
+
+  return(figSens_4and5)
+}
+

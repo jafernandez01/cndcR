@@ -1,8 +1,12 @@
+#' @name fig4a
+#' @title
+#' Plot figure 4a from Fernandez et al. (2022)
+#' @description
+#' This function returns figure 4a in Fernandez et al.(2022): Regression: Range of biomass of the CNDC across crop species.
 
-## Min and max biomass
-data("biblioCNDC")
+fig4a <- function() {
 
-figW_range <- biblioCNDC |>
+  figW_range <- cndcR::biblioCNDC |>
   filter(!c(Species == "Generic")) |>
   group_by(Species) |>
   summarise(minW = min(minW, na.rm = T), maxW = max(maxW, na.rm = T)) |>
@@ -17,7 +21,6 @@ figW_range <- biblioCNDC |>
   geom_point(aes(y = maxW, x = Species), fill = "#49695c", shape = 19) +
 
   ylab(expression("Biomass (Mg ha"^"-1"~")")) + xlab(NULL) +
-  #ggtitle("Range of biomass for the CNDC") +
 
   scale_y_continuous(limits = c(0,35), breaks = seq(0,30,5)) +
   coord_flip() +
@@ -36,3 +39,5 @@ figW_range <- biblioCNDC |>
         axis.text.y = element_text(margin=unit(c(0.5,0.2,0.5,0.5), "cm"), size = 8, face = 3),
         axis.text.x = element_text(margin=unit(c(0.3,0.5,0.2,0.5), "cm")))
 
+  return(figW_range)
+}

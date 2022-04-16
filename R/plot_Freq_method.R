@@ -1,8 +1,13 @@
+#' @name fig1a
+#' @title
+#' Plot figure 1a from Fernandez et al. (2022)
+#' @description
+#' This function returns figure 1a in Fernandez et al.(2022): Frequency distribution of statistical method used for fitting CNDC
+#' in literature.
 
-## Statistical method
-data("biblioCNDC")
+fig1a <- function() {
 
-figFreq_method <- biblioCNDC %>%
+  figFreq_method <- cndcR::biblioCNDC %>%
   mutate(Model = if_else(Model == "NA", NA_character_, as.character(Model))) %>% drop_na(Model) %>%
   mutate(Method = case_when(Method == "Justes et al." ~ "Justes et al. (1994)",
                             Method == "Herrmann and Taube" ~ "Herrmann and Taube (2004)",
@@ -33,3 +38,6 @@ figFreq_method <- biblioCNDC %>%
         axis.ticks.length=unit(-0.15, "cm"),
         axis.text.x = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm"), size = 10, hjust = .8, angle = 15, vjust = 1),
         axis.text.y = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm"), size = 13))
+
+return(figFreq_method)
+}

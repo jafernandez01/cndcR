@@ -1,8 +1,13 @@
+#' @name fig2a
+#' @title
+#' Plot figure 2a from Fernandez et al. (2022)
+#' @description
+#' This function returns figure 2a in Fernandez et al.(2022): Frequency distribution of number of experiments used for fitting CNDC
+#' in literature.
 
-## No. studies
-data("biblioCNDC")
+fig2a <- function() {
 
-figFreq_exps <- biblioCNDC %>%
+  figFreq_exps <- cndcR::biblioCNDC %>%
   mutate(nExp_calibration = if_else(is.na(nExp_calibration), 0, as.numeric(nExp_calibration)),
          nExp_validation = if_else(is.na(nExp_validation), 0, as.numeric(nExp_validation)) ) %>%
   mutate(nStudies = nExp_calibration + nExp_validation) %>%
@@ -30,3 +35,6 @@ figFreq_exps <- biblioCNDC %>%
         axis.ticks.length=unit(-0.15, "cm"),
         axis.text.x = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm")),
         axis.text.y = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm"), size = 13))
+
+return(figFreq_exps)
+}

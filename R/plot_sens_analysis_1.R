@@ -1,5 +1,14 @@
+#' @name fig2b_c
+#' @title
+#' Plot figure 2b and 2c from Fernandez et al. (2022)
+#' @description
+#' This function returns figure 2b and 2c in Fernandez et al.(2022): Sensitivity analyses for the number of
+#' experiments used to estimate a and b parameters of the CNDC in a case-study for maize, presenting bias
+#' and uncertainty (precision).
 
-data("fdataSens_1")
+fig2b_c <- function() {
+
+fdataSens_1 <- cndcR:::fdataSens_1
 
 # Pre-process for plotting results ----------------------
 ## extract parameters for the full-model (boot 8) for comparisons
@@ -78,3 +87,6 @@ ggplot2::ggplot(aes(x = n, y = value, fill = Parameter, shape = Parameter)) +
     axis.text.x = element_text(margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")),
     axis.text.y = element_text(margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"), size = 13)
   )
+
+return(figSens_1)
+}

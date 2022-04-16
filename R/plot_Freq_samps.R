@@ -1,8 +1,13 @@
+#' @name fig3b
+#' @title
+#' Plot figure 3b from Fernandez et al. (2022)
+#' @description
+#' This function returns figure 3b in Fernandez et al.(2022): Frequency distribution of number of samplings used for fitting CNDC
+#' in literature.
 
-## No. samplings
-data("biblioCNDC")
+fig3b <- function() {
 
-figFreq_samps <- biblioCNDC %>%
+  figFreq_samps <- cndcR::biblioCNDC %>%
   mutate(min = as.numeric(sub("to.*","",nSamp)),
          max = as.numeric(sub(".*to","",nSamp)),
          range = max - min) %>%
@@ -35,3 +40,6 @@ figFreq_samps <- biblioCNDC %>%
         axis.ticks.length=unit(-0.15, "cm"),
         axis.text.x = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm")),
         axis.text.y = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm"), size = 13))
+
+  return(figFreq_samps)
+}

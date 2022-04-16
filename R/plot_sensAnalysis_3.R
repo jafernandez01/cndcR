@@ -1,5 +1,14 @@
+#' @name fig3e_f
+#' @title
+#' Plot figure 3e and 3f from Fernandez et al. (2022)
+#' @description
+#' This function returns figure 3e and 3f in Fernandez et al.(2022): Sensitivity analyses for the number of
+#' sampling times used to estimate a and b parameters of the CNDC in a case-study for maize, presenting bias
+#' and uncertainty (precision).
 
-data("fdataSens_3")
+fig3e_f <- function() {
+
+fdataSens_3 <- cndcR:::fdataSens_3
 
 # Pre-process for plotting results ----------------------
 ## extract parameters for the full-model (boot 6) for comparisons
@@ -76,3 +85,6 @@ ggplot2::ggplot(aes(x = n, y = value, fill = Parameter, shape = Parameter)) +
     axis.text.x = element_text(margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")),
     axis.text.y = element_text(margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"), size = 13)
   )
+
+return(figSens_3)
+}

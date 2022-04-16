@@ -1,9 +1,13 @@
+#' @name fig1c
+#' @title
+#' Plot figure 1c from Fernandez et al. (2022)
+#' @description
+#' This function returns figure 1c in Fernandez et al.(2022): Boxplots and density plots for the distribution
+#' of the a (A1) parameter of the CNDC for C3 (red color) and C4 (blue color) species in studies from literature.
 
-# Boxplot distributions
-## Type of species
-data("biblioCNDC")
+fig1c <- function() {
 
-figBoxPlot_a <- biblioCNDC  %>%
+figBoxPlot_a <- cndcR::biblioCNDC  %>%
   mutate(speciesType = case_when(Species == "Zea mays L." ~ "C4 type",
                                  Species == "Sorghum bicolor L." ~ "C4 type",
                                  Species == "Saccharum officinarum L." ~ "C4 type",
@@ -39,3 +43,6 @@ figBoxPlot_a <- biblioCNDC  %>%
         axis.ticks.length.x = unit(-0.15, "cm"),
         axis.text.y = element_blank(),
         axis.text.x = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm")))
+
+return(figBoxPlot_a)
+}

@@ -1,8 +1,13 @@
+#' @name fig1b
+#' @title
+#' Plot figure 1b from Fernandez et al. (2022)
+#' @description
+#' This function returns figure 1b in Fernandez et al.(2022): Frequency distribution of N determination method used for fitting CNDC
+#' in literature.
 
-## Laboratory method
-data("biblioCNDC")
+fig1b <- function() {
 
-figFreq_Ndeterm <- biblioCNDC %>%
+  figFreq_Ndeterm <- cndcR::biblioCNDC %>%
   drop_na(NLabMethod) %>%
   ggplot(aes(x = forcats::fct_infreq(NLabMethod) ) ) +
   geom_bar(color = "#3d3c3c") +
@@ -24,3 +29,6 @@ figFreq_Ndeterm <- biblioCNDC %>%
         axis.ticks.length=unit(-0.15, "cm"),
         axis.text.x = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm")),
         axis.text.y = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm"), size = 13))
+
+  return(figFreq_Ndeterm)
+}
