@@ -4,3 +4,8 @@
 \name{cndcR}
 \alias{cndcR}
 \title{cndcR.}
+\description{
+The source data and R codes used for sensitivity analyses with the Bayesian
+method in "Minimum dataset characteristics for the determination of critical
+nitrogen dilution curves using field experiments"
+}

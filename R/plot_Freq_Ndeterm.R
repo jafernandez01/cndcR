@@ -7,7 +7,8 @@
 
 fig1b <- function() {
 
-  figFreq_Ndeterm <- cndcR::biblioCNDC %>%
+  data("biblioCNDC")
+  figFreq_Ndeterm <- biblioCNDC %>%
   drop_na(NLabMethod) %>%
   ggplot(aes(x = forcats::fct_infreq(NLabMethod) ) ) +
   geom_bar(color = "#3d3c3c") +

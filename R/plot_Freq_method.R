@@ -7,7 +7,8 @@
 
 fig1a <- function() {
 
-  figFreq_method <- cndcR::biblioCNDC %>%
+  data("biblioCNDC")
+  figFreq_method <- biblioCNDC %>%
   mutate(Model = if_else(Model == "NA", NA_character_, as.character(Model))) %>% drop_na(Model) %>%
   mutate(Method = case_when(Method == "Justes et al." ~ "Justes et al. (1994)",
                             Method == "Herrmann and Taube" ~ "Herrmann and Taube (2004)",

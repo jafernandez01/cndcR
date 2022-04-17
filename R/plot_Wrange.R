@@ -6,7 +6,8 @@
 
 fig4a <- function() {
 
-  figW_range <- cndcR::biblioCNDC |>
+  data("biblioCNDC")
+  figW_range <- biblioCNDC |>
   filter(!c(Species == "Generic")) |>
   group_by(Species) |>
   summarise(minW = min(minW, na.rm = T), maxW = max(maxW, na.rm = T)) |>

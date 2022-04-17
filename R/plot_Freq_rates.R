@@ -7,7 +7,8 @@
 
 fig3a <- function() {
 
-  figFreq_rates <- cndcR::biblioCNDC %>%
+  data("biblioCNDC")
+  figFreq_rates <- biblioCNDC %>%
   mutate(min = as.numeric(sub("to.*","",nRates)),
          max = as.numeric(sub(".*to","",nRates)),
          range = max - min) %>%

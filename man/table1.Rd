@@ -7,22 +7,25 @@
 table1()
 }
 \description{
-This function returns values for table 1 in Fernandez et al.(2022): Evaluation of four critical nitrogen dilution curves (CNDC)
-models fitted with the Bayesian approach using four types of datasets: (All data or only Wmax achieved data) ✕
-(unweighted or variance-weighted data model).
+This function returns values for table 1 in Fernandez et al.(2022): Evaluation of four critical
+nitrogen dilution curves (CNDC) models fitted with the Bayesian approach using four types of
+datasets: (All data or only Wmax achieved data) ✕ (unweighted or variance-weighted data model).
 }
 \details{
 The four models were compared based on model parameters:
-1.  Posterior distributions for a (A1) and b (A2) are averaged to obtain posterior medians and credibility intervals from all the samples.
-2.  Then, they are used to estimate NNI values across an independent validation set of observations and compared against the reference
-curve by Plenet and Lemaire (2000).
-3.  Error metrics for the agreement between NNI estimated and reference are calculated using the metrica:: library.
+1.  Posterior distributions for a (A1) and b (A2) are averaged to obtain posterior medians and
+credibility intervals from all the samples.
+2.  Then, they are used to estimate NNI values across an independent validation set of
+observations and compared against the reference curve by Plenet and Lemaire (2000).
+3.  Error metrics for the agreement between NNI estimated and reference are calculated using the
+metrica:: library.
 4.  Deviance information criterion (DIC) is retrieved for each model.
 }
 \examples{
 \dontrun{
 Compare DIC of models ---------------------------------------------
-dicSens_4and5 <- data_frame(Method = c("Unweighted-Wmax", "Unweighted-Wall", "Weighted-Wmax", "Weighted-Wall"))  \%>\%
+dicSens_4and5 <- data_frame(Method = c("Unweighted-Wmax", "Unweighted-Wall", "Weighted-Wmax",
+"Weighted-Wall"))  \%>\%
   mutate(DIC = case_when(
     Method == "Unweighted-Wmax" ~ dic_4[[1]][[1]]  \%>\%  sum(),
     Method == "Unweighted-Wall" ~ dic_4[[2]][[1]]  \%>\%  sum(),

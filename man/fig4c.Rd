@@ -3,6 +3,13 @@
 \name{fig4c}
 \alias{fig4c}
 \title{Plot figure 4c from Fernandez et al. (2022)}
+\usage{
+fig4c()
+}
+\value{
+figQuantile_Reg: ggplot object figure
+}
 \description{
-This function returns figure 4c in Fernandez et al.(2022): Regression: minW vs. b coefficient of the CNDC.
+This function returns figure 4c in Fernandez et al.(2022): Regression: minW vs. b coefficient of
+the CNDC.
 }

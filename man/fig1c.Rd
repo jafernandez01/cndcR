@@ -7,6 +7,7 @@
 fig1c()
 }
 \description{
-This function returns figure 1c in Fernandez et al.(2022): Boxplots and density plots for the distribution
-of the a (A1) parameter of the CNDC for C3 (red color) and C4 (blue color) species in studies from literature.
+This function returns figure 1c in Fernandez et al.(2022): Boxplots and density plots for the
+distribution of the a (A1) parameter of the CNDC for C3 (red color) and C4 (blue color) species
+in studies from literature.
 }

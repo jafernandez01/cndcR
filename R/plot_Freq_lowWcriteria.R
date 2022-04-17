@@ -7,7 +7,8 @@
 
 fig4b <- function() {
 
-  figFreq_lowWcriteria <- cndcR::biblioCNDC %>%
+  data("biblioCNDC")
+  figFreq_lowWcriteria <- biblioCNDC %>%
   dplyr::mutate(preProcess = if_else(preProcess == "NA", NA_character_, as.character(preProcess) ),
          preProcess = if_else(is.na(preProcess), "NO", as.character(preProcess) )) |>
 

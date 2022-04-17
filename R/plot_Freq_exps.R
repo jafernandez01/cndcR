@@ -7,7 +7,8 @@
 
 fig2a <- function() {
 
-  figFreq_exps <- cndcR::biblioCNDC %>%
+  data("biblioCNDC")
+  figFreq_exps <- biblioCNDC %>%
   mutate(nExp_calibration = if_else(is.na(nExp_calibration), 0, as.numeric(nExp_calibration)),
          nExp_validation = if_else(is.na(nExp_validation), 0, as.numeric(nExp_validation)) ) %>%
   mutate(nStudies = nExp_calibration + nExp_validation) %>%

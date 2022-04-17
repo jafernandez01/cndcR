@@ -2,47 +2,52 @@
 #' @title
 #' Plot figure 1c from Fernandez et al. (2022)
 #' @description
-#' This function returns figure 1c in Fernandez et al.(2022): Boxplots and density plots for the distribution
-#' of the a (A1) parameter of the CNDC for C3 (red color) and C4 (blue color) species in studies from literature.
+#' This function returns figure 1c in Fernandez et al.(2022): Boxplots and density plots for the
+#' distribution of the a (A1) parameter of the CNDC for C3 (red color) and C4 (blue color) species
+#' in studies from literature.
 
 fig1c <- function() {
 
-figBoxPlot_a <- cndcR::biblioCNDC  %>%
-  mutate(speciesType = case_when(Species == "Zea mays L." ~ "C4 type",
+  figBoxPlot_a <- cndcR::biblioCNDC  %>%
+  dplyr::mutate(speciesType = dplyr::case_when(Species == "Zea mays L." ~ "C4 type",
                                  Species == "Sorghum bicolor L." ~ "C4 type",
                                  Species == "Saccharum officinarum L." ~ "C4 type",
                                  Species == "Miscanthus x giganteus" ~ "C4 type",
                                  Species == "Generic" ~ "C4 type",
                                  TRUE ~ "C3 type"))  %>%
-  mutate(speciesType = case_when(`Crop type` == "C3 species" ~ "C3 type", TRUE ~ as.character(speciesType)))  %>%
+  dplyr::mutate(speciesType = dplyr::case_when(`Crop type` == "C3 species" ~ "C3 type",
+                                               TRUE ~ as.character(speciesType)))  %>%
 
-  ggplot(aes(x = speciesType, y = A1, fill = speciesType, color = speciesType)) +
-  ggdist::stat_halfeye(adjust = .7, width = .6, .width = 0, justification = -.2, point_colour = NA) +
+  ggplot2::ggplot(aes(x = .data$speciesType, y = .data$A1, fill = .data$speciesType,
+                     color = .data$speciesType)) +
+  ggdist::stat_halfeye(adjust = .7, width = .6, .width = 0,
+                       justification = -.2, point_colour = NA) +
   gghalves::geom_half_point(side = "l", range_scale = .4, alpha = .7, color = "black") +
-  geom_boxplot(width = .15, outlier.shape = NA, alpha = .5) +
+  ggplot2::geom_boxplot(width = .15, outlier.shape = NA, alpha = .5) +
 
   ggsci::scale_fill_npg() +
   ggsci::scale_color_npg() +
 
-  ylab("Value") + xlab(NULL) +
-  ggtitle(expression(paste(italic("a")," coefficient"))) +
+  ggplot2::ylab("Value") +
+  ggplot2::xlab(NULL) +
+  ggplot2::ggtitle(expression(paste(italic("a")," coefficient"))) +
 
-  coord_flip() +
+  ggplot2::coord_flip() +
 
-  theme(panel.grid.minor = element_blank(),
-        panel.grid.major = element_line(color = "#e8e9eb"),
-        panel.background = element_rect(fill = "#f5f5f5"),
-        panel.border = element_rect(colour = "black", fill = NA),
+  ggplot2::theme(panel.grid.minor = ggplot2::element_blank(),
+        panel.grid.major = ggplot2::element_line(color = "#e8e9eb"),
+        panel.background = ggplot2::element_rect(fill = "#f5f5f5"),
+        panel.border = ggplot2::element_rect(colour = "black", fill = NA),
 
-        text = element_text(size = 14),
-        legend.title = element_blank(),
+        text = ggplot2::element_text(size = 14),
+        legend.title = ggplot2::element_blank(),
         legend.position = c(0.8,0.8),
-        legend.background = element_blank(),
+        legend.background = ggplot2::element_blank(),
 
-        axis.ticks.length.y = unit(0, "cm"),
-        axis.ticks.length.x = unit(-0.15, "cm"),
-        axis.text.y = element_blank(),
-        axis.text.x = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm")))
+        axis.ticks.length.y = ggplot2::unit(0, "cm"),
+        axis.ticks.length.x = ggplot2::unit(-0.15, "cm"),
+        axis.text.y = ggplot2::element_blank(),
+        axis.text.x = ggplot2::element_text(margin=ggplot2::unit(c(0.5,0.5,0.5,0.5), "cm")))
 
 return(figBoxPlot_a)
 }

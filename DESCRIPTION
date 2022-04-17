@@ -1,11 +1,10 @@
 Package: cndcR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Critical Nitrogen Dilution Curves in R
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Javier Fernandez
+Maintainer: The package maintainer <jafernandez@ksu.edu>
+Description: The source data and R codes used for sensitivity analyses with the Bayesian method in "Minimum dataset characteristics for the determination of critical nitrogen dilution curves using field experiments"
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
@@ -14,8 +13,6 @@ Imports:
     readxl,
     dplyr,
     magrittr,
-    rjags,
-    mcp,
     foreach,
     metrica,
     stringr,
@@ -27,6 +24,9 @@ Imports:
     quantreg,
     forcats,
     nlraa
+Suggests:
+    testhat
+Remotes: adriancorrendo/metrica
 Depends: 
     R (>= 2.10)
 RoxygenNote: 7.1.2

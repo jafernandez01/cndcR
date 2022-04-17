@@ -7,7 +7,8 @@
 
 fig3b <- function() {
 
-  figFreq_samps <- cndcR::biblioCNDC %>%
+  data("biblioCNDC")
+  figFreq_samps <- biblioCNDC %>%
   mutate(min = as.numeric(sub("to.*","",nSamp)),
          max = as.numeric(sub(".*to","",nSamp)),
          range = max - min) %>%
