@@ -7,7 +7,7 @@
 table1()
 }
 \description{
-This function returns table 1 in Fernandez et al.(2022): Evaluation of four critical nitrogen dilution curves (CNDC)
+This function returns values for table 1 in Fernandez et al.(2022): Evaluation of four critical nitrogen dilution curves (CNDC)
 models fitted with the Bayesian approach using four types of datasets: (All data or only Wmax achieved data) ✕
 (unweighted or variance-weighted data model).
 }
