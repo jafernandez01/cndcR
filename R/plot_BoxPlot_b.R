@@ -29,7 +29,7 @@ fig1d <- function() {
   ggsci::scale_color_npg() +
 
   ggplot2::ylab("Value") + ggplot2::xlab(NULL) +
-  ggtitle(expression(paste(italic("b")," coefficient"))) +
+  ggplot2::ggtitle(expression(paste(italic("b")," coefficient"))) +
 
   ggplot2::coord_flip() +
 
@@ -43,8 +43,8 @@ fig1d <- function() {
         legend.position = "none",
         legend.background = ggplot2::element_blank(),
 
-        axis.ticks.length.y = unit(0, "cm"),
-        axis.ticks.length.x = unit(-0.15, "cm"),
+        axis.ticks.length.y = ggplot2::unit(0, "cm"),
+        axis.ticks.length.x = ggplot2::unit(-0.15, "cm"),
         axis.text.y = ggplot2::element_blank(),
         axis.text.x = ggplot2::element_text(margin=ggplot2::unit(c(0.5,0.5,0.5,0.5), "cm")))
 

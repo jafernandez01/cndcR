@@ -1,6 +1,5 @@
 exportPattern("^[[:alpha:]]+")
 import(dplyr)
 import(tidyr)
-import(ggplot2)
 importFrom(magrittr,"%>%")
 importFrom(nlraa, SSlinp)

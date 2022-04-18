@@ -9,7 +9,7 @@ fig1b <- function() {
 
   figFreq_Ndeterm <- cndcR::biblioCNDC %>%
   tidyr::drop_na(.data$NLabMethod) %>%
-  ggplot2::ggplot(aes(x = forcats::fct_infreq(.data$NLabMethod) ) ) +
+  ggplot2::ggplot(ggplot2::aes(x = forcats::fct_infreq(.data$NLabMethod) ) ) +
   ggplot2::geom_bar(color = "#3d3c3c") +
   ggplot2::geom_text(stat='count', ggplot2::aes(label=.data$..count..), vjust=-0.3, fontface = 3) +
 

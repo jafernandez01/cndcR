@@ -40,7 +40,7 @@ fig4a <- function() {
         legend.position = c(0.8,0.8),
         legend.background = ggplot2::element_blank(),
 
-        axis.ticks.length = unit(-0.15, "cm"),
+        axis.ticks.length = ggplot2::unit(-0.15, "cm"),
         axis.text.y = ggplot2::element_text(margin=ggplot2::unit(c(0.5,0.2,0.5,0.5), "cm"),
                                             size = 8, face = 3),
         axis.text.x = ggplot2::element_text(margin=ggplot2::unit(c(0.3,0.5,0.2,0.5), "cm")))

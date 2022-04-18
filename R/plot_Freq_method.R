@@ -38,7 +38,7 @@ fig1a <- function() {
         legend.position = c(0.8,0.8),
         legend.background = ggplot2::element_blank(),
 
-        axis.ticks.length=unit(-0.15, "cm"),
+        axis.ticks.length=ggplot2::unit(-0.15, "cm"),
         axis.text.x = ggplot2::element_text(margin=ggplot2::unit(c(0.5,0.5,0.5,0.5), "cm"),
                                             size = 10, hjust = .8, angle = 15, vjust = 1),
         axis.text.y = ggplot2::element_text(margin=ggplot2::unit(c(0.5,0.5,0.5,0.5), "cm"),

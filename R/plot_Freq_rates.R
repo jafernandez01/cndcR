@@ -22,7 +22,7 @@ fig3a <- function() {
   ggplot2::geom_text(stat='count', ggplot2::aes(label=.data$..count..), vjust=-0.3, fontface = 3) +
 
   ggplot2::ylab("Number of CNDCs") +
-  ggplot2::ggtitle("Number of N rates") + xlab(NULL) +
+  ggplot2::ggtitle("Number of N rates") + ggplot2::xlab(NULL) +
 
   ggplot2::scale_fill_manual(values = c("#3d3c3c","#c4c2c2")) +
   ggplot2::scale_x_continuous(breaks = seq(2,7,1)) +
