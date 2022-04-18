@@ -1,6 +1,6 @@
 # cndcR
 
-[![R-CMD-check](https://github.com/jafernandez01/cndcR/actions/workflows/check-standard.yml/badge.svg?branch=main)](https://github.com/jafernandez01/cndcR/actions/workflows/check-standard.yml)
+[![R-CMD-check](https://github.com/jafernandez01/cndcR/actions/workflows/r.yml/badge.svg)](https://github.com/jafernandez01/cndcR/actions/workflows/r.yml)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-red.svg)](https://github.com/jafernandez01/cndcR/blob/main/LICENSE.md)
 [![DOI](https://zenodo.org/badge/482033970.svg)](https://zenodo.org/badge/latestdoi/482033970)
 
