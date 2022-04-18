@@ -10,7 +10,7 @@ fig4b <- function() {
   figFreq_lowWcriteria <- cndcR::biblioCNDC %>%
   dplyr::mutate(preProcess = if_else(.data$preProcess == "NA", NA_character_,
                                      as.character(.data$preProcess) ),
-         preProcess = if_else(is.na(.data$preProcess), "NO", as.character(.data$preProcess) )) |>
+         preProcess = if_else(is.na(.data$preProcess), "NO", as.character(.data$preProcess) ))  %>%
 
   tidyr::drop_na(.data$preProcess) %>%
     ggplot2::ggplot(ggplot2::aes(x = forcats::fct_infreq(.data$preProcess) ) ) +

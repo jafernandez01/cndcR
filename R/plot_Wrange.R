@@ -7,15 +7,15 @@
 
 fig4a <- function() {
 
-  figW_range <- cndcR::biblioCNDC |>
-  dplyr::filter(!c(.data$Species == "Generic")) |>
-  dplyr::group_by(.data$Species) |>
-  dplyr::summarise(minW = min(.data$minW, na.rm = T), maxW = max(.data$maxW, na.rm = T)) |>
-  dplyr::mutate_if(is.numeric, list(~na_if(., Inf))) |>
-  dplyr::mutate_if(is.numeric, list(~na_if(., -Inf))) |>
+  figW_range <- cndcR::biblioCNDC  %>%
+  dplyr::filter(!c(.data$Species == "Generic"))  %>%
+  dplyr::group_by(.data$Species)  %>%
+  dplyr::summarise(minW = min(.data$minW, na.rm = T), maxW = max(.data$maxW, na.rm = T))  %>%
+  dplyr::mutate_if(is.numeric, list(~na_if(., Inf)))  %>%
+  dplyr::mutate_if(is.numeric, list(~na_if(., -Inf)))  %>%
   dplyr::mutate(range = .data$minW-.data$maxW,
-                Species = forcats::fct_reorder(.data$Species, .data$range, .desc = F) ) |>
-  dplyr::filter(!c(is.na(.data$minW) & is.na(.data$maxW))) |>
+                Species = forcats::fct_reorder(.data$Species, .data$range, .desc = F) )  %>%
+  dplyr::filter(!c(is.na(.data$minW) & is.na(.data$maxW)))  %>%
 
   ggplot2::ggplot() +
   ggplot2::geom_segment(ggplot2::aes(y = .data$minW, yend = .data$maxW,

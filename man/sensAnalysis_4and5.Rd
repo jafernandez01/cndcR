@@ -53,37 +53,37 @@ prior_null <- list(
   Nrates_1 = "dnorm(0, 5)"
 )
 
-    dataSens_4 <- Data |>
-      dplyr::group_by(Site_year, Samp) |>
+    dataSens_4 <- Data  \%>\%
+      dplyr::group_by(Site_year, Samp)  \%>\%
       dplyr::mutate(
         Wmax = max(W, na.rm = T),
         RelW = W / Wmax
-      ) |>
-      dplyr::group_by(Site_year, Samp) |>
-      tidyr::nest() |>
+      )  \%>\%
+      dplyr::group_by(Site_year, Samp)  \%>\%
+      tidyr::nest()  \%>\%
 
       # loop for linear and linear-plateau models --------------------
     dplyr::mutate(
-      m1 = data |> purrr::map(purrr::possibly(~ mcp::mcp(
+      m1 = data  \%>\%  purrr::map(purrr::possibly(~ mcp::mcp(
         model = model_null, data = .x, iter = 10000, adapt = 5000,
         chains = 3, prior = prior_null, cores = 3
       ), otherwise = NA, quiet = TRUE)),
-      m2 = data |> purrr::map(purrr::possibly(~ mcp::mcp(
+      m2 = data  \%>\%  purrr::map(purrr::possibly(~ mcp::mcp(
         model = model_linp, data = .x, iter = 10000, adapt = 5000,
         chains = 3, prior = prior_linp, cores = 3
       ), otherwise = NA, quiet = TRUE))
-    ) |>
+    )  \%>\%
 
       # loop for obtaining waic for both models --------------------
     dplyr::mutate(
-      WAICm1 = m1 |> purrr::map(purrr::possibly(~ mcp::waic(.x)$waic, otherwise = NA,
+      WAICm1 = m1  \%>\%  purrr::map(purrr::possibly(~ mcp::waic(.x)$waic, otherwise = NA,
       quiet = TRUE)),
-      WAICm2 = m2 |> purrr::map(purrr::possibly(~ mcp::waic(.x)$waic, otherwise = NA,
+      WAICm2 = m2  \%>\%  purrr::map(purrr::possibly(~ mcp::waic(.x)$waic, otherwise = NA,
       quiet = TRUE))
-    ) |>
+    )  \%>\%
 
       # loop for selecting model --------------------
-    tidyr::unnest(WAICm1, WAICm2) |>
+    tidyr::unnest(WAICm1, WAICm2)  \%>\%
       dplyr::mutate(
         m_sel = dplyr::case_when(
           is.na(WAICm1) ~ m2,
@@ -98,11 +98,11 @@ prior_null <- list(
           WAICm1 <= WAICm2 ~ "excluded",
           TRUE ~ "selected"
         )
-      ) |>
+      )  \%>\%
 
       # loop for extracting predictions for visual assessment --------------------
-    dplyr::mutate(ndat = data |> purrr::map(~ tidyr::expand_grid(Nrates = full_seq(.x$Nrates,
-    10, tol = 5)))) |>
+    dplyr::mutate(ndat = data  \%>\%  purrr::map(~ tidyr::expand_grid(Nrates = full_seq(.x$Nrates,
+    10, tol = 5))))  \%>\%
       dplyr::mutate(ndat = purrr::map2(.x = ndat, .y = m_sel,
       purrr::possibly(~ predict(object = .y, newdata = .x, probs = c(0.5)),
                                                          otherwise = NA, quiet = TRUE
@@ -110,12 +110,12 @@ prior_null <- list(
 
 
 # Filter data with variance information and combined 4th and 5th types of data:
-dataSens_5 <- Data |> filter_at(.vars = vars(Na_SE, W_SE), .vars_predicate= all_vars(!is.na(.)))
+dataSens_5 <- Data  \%>\%  filter_at(.vars = vars(Na_SE, W_SE), .vars_predicate= all_vars(!is.na(.)))
 
 dataSens_4and5 <- list(
-  dataSens_4 |>
-    dplyr::select(Wmax_test) |>
-    right_join(dataSens_5) |>
+  dataSens_4  \%>\%
+    dplyr::select(Wmax_test)  \%>\%
+    right_join(dataSens_5)  \%>\%
     filter(Wmax_test == "selected"),
   dataSens_5
 )
@@ -291,30 +291,30 @@ fdataSens_4and5 <- bind_rows(
   #' unweighted models
   purrr::map2_dfr(
     mcmcChain_4, seq(1, 2, 1),
-    ~ .x |>
-      as.data.frame() |>
-      dplyr::mutate(Imp = .y) |>
+    ~ .x  \%>\%
+      as.data.frame()  \%>\%
+      dplyr::mutate(Imp = .y)  \%>\%
       tidyr::pivot_longer(-Imp, names_to = "Parameter", values_to = "Value")
-  ) |>
+  )  \%>\%
     dplyr::mutate(
       Method = dplyr::if_else(Imp == 1, "Unweighted-Wmax", "Unweighted-Wall"),
       Samp = stringr::str_replace(Parameter, ".*\\\\[(\\\\d{1,2})\\\\]$", "\\\\1"),
       Parameter = stringr::str_remove(Parameter, "\\\\[\\\\d{1,2}\\\\]$")
-    ) |>
+    )  \%>\%
     dplyr::filter(Parameter \%in\% c("A1", "A2")),
   #' weighted models
   purrr::map2_dfr(
     mcmcChain_5, seq(1, 2, 1),
-    ~ .x |>
-      as.data.frame() |>
-      dplyr::mutate(Imp = .y) |>
+    ~ .x  \%>\%
+      as.data.frame()  \%>\%
+      dplyr::mutate(Imp = .y)  \%>\%
       tidyr::pivot_longer(-Imp, names_to = "Parameter", values_to = "Value")
-  ) |>
+  )  \%>\%
     dplyr::mutate(
       Method = dplyr::if_else(Imp == 1, "Weighted-Wmax", "Weighted-Wall"),
       Samp = stringr::str_replace(Parameter, ".*\\\\[(\\\\d{1,2})\\\\]$", "\\\\1"),
       Parameter = stringr::str_remove(Parameter, "\\\\[\\\\d{1,2}\\\\]$")
-    ) |>
+    )  \%>\%
     dplyr::filter(Parameter \%in\% c("A1", "A2"))
 )
 }

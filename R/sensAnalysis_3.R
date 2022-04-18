@@ -21,12 +21,12 @@
 #' set.seed(500)
 #' dataSens_3 <- NULL
 #' for (i in seq(1, 6, 1)) {
-#'   dataSens_3[[i]] <- replicate(100, Data |>
-#'                                  group_by(Site_year) |>
-#'                                  filter(length(unique(Samp)) > 5) |>
-#'                                  nest() |>
+#'   dataSens_3[[i]] <- replicate(100, Data  %>%
+#'                                  group_by(Site_year)  %>%
+#'                                  filter(length(unique(Samp)) > 5)  %>%
+#'                                  nest()  %>%
 #'                                  mutate(sample = purrr::map(data, ~ filter(.x,
-#'                                  Samp %in% sample(unique(.x$Samp), i, replace = F)))) |>
+#'                                  Samp %in% sample(unique(.x$Samp), i, replace = F))))  %>%
 #'                                  unnest(sample), simplify = F)
 #' }
 #'
@@ -127,21 +127,21 @@
 #'
 #'   purrr::map2_dfr(
 #'     bootSamp_3[[i]], seq(1, 100, 1),
-#'     ~ .x |>
-#'       as.data.frame() |>
-#'       dplyr::mutate(Imp = .y) |>
+#'     ~ .x  %>%
+#'       as.data.frame()  %>%
+#'       dplyr::mutate(Imp = .y)  %>%
 #'       tidyr::pivot_longer(-Imp, names_to = "Parameter", values_to = "Value")
-#'   ) |>
+#'   )  %>%
 #'     dplyr::mutate(
 #'       Method = paste("Boot", i, sep = ""),
 #'       Samp = stringr::str_replace(Parameter, ".*\\[(\\d{1,2})\\]$", "\\1"),
 #'       Parameter = stringr::str_remove(Parameter, "\\[\\d{1,2}\\]$")
-#'     ) |>
+#'     )  %>%
 #'     dplyr::filter(Parameter %in% c("A1", "A2"))
 #' }
 #'
-#' fdataSens_3 <- bind_rows(fdataSens_3) |>
-#'   dplyr::group_by(Parameter, Method) |>
+#' fdataSens_3 <- bind_rows(fdataSens_3)  %>%
+#'   dplyr::group_by(Parameter, Method)  %>%
 #'   dplyr::summarise(lowCI = quantile(Value, 0.025), uppCI = quantile(Value, 0.975),
 #'   mean = mean(Value))
 #'

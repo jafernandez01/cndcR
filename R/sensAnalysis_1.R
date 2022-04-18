@@ -25,7 +25,7 @@
 #'   Site_year %in% sample(unique(Data$Site_year), i, replace = T)), simplify = F)
 #' }
 #'
-#' dataSens_1 <- dataSens_1 |> discard(is.null)
+#' dataSens_1 <- dataSens_1  %>%  discard(is.null)
 #'
 #' # Parameters and JAGS settings are defined for the MCMC (Markov Chain Monte Carlo) procedure to
 #' # model the power function of CNDC across sampling dates. Weakly-informative priors were defined
@@ -123,21 +123,21 @@
 #'
 #'   purrr::map2_dfr(
 #'     bootSamp_1[[i]], seq(1, 100, 1),
-#'     ~ .x |>
-#'       as.data.frame() |>
-#'       dplyr::mutate(Imp = .y) |>
+#'     ~ .x  %>%
+#'       as.data.frame()  %>%
+#'       dplyr::mutate(Imp = .y)  %>%
 #'       tidyr::pivot_longer(-Imp, names_to = "Parameter", values_to = "Value")
-#'   ) |>
+#'   )  %>%
 #'     dplyr::mutate(
 #'       Method = paste("Boot", i, sep = ""),
 #'       Samp = stringr::str_replace(Parameter, ".*\\[(\\d{1,2})\\]$", "\\1"),
 #'       Parameter = stringr::str_remove(Parameter, "\\[\\d{1,2}\\]$")
-#'     ) |>
+#'     )  %>%
 #'     dplyr::filter(Parameter %in% c("A1", "A2"))
 #' }
 #'
-#' fdataSens_1 <- bind_rows(fdataSens_1) |>
-#'   dplyr::group_by(Parameter, Method) |>
+#' fdataSens_1 <- bind_rows(fdataSens_1)  %>%
+#'   dplyr::group_by(Parameter, Method)  %>%
 #'   dplyr::summarise(lowCI = quantile(Value, 0.025), uppCI = quantile(Value, 0.975),
 #'   mean = mean(Value))
 #' }
