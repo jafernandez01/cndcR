@@ -1,6 +1,4 @@
-![R-CMD-check](https://github.com/igraph/rigraph/workflows/R-CMD-check/badge.svg)
-
-[![R-CMD-check](https://github.com/jafernandez01/cndcR/actions/workflows/r.yml/badge.svg)](https://github.com/jafernandez01/cndcR/actions/workflows/r.yml)
+[![R-CMD-check](https://github.com/jafernandez01/cndcR/actions/workflows/check-release.yaml/badge.svg?branch=main&event=status)](https://github.com/jafernandez01/cndcR/actions/workflows/check-release.yaml)
 
 # cndcR
 
