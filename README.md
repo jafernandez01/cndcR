@@ -1,6 +1,5 @@
 # cndcR
 
-[![Tests](https://github.com/jafernandez01/cndcR/actions/workflows/Tests/badge.svg)](https://github.com/jafernandez01/cndcR/actions/workflows/tests.yaml)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg)](https://github.com/jafernandez01/cndcR/blob/main/LICENSE.md)
 
 cndcR is an R data package of the manuscript "Minimum dataset characteristics for the determination of critical nitrogen dilution curves using field experiments". The package contains the source data and R codes used for sensitivity analyses to fit critical N dilution curves in crop species using Bayesian models.
