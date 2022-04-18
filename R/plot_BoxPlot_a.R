@@ -18,7 +18,7 @@ fig1c <- function() {
   dplyr::mutate(speciesType = dplyr::case_when(`Crop type` == "C3 species" ~ "C3 type",
                                                TRUE ~ as.character(speciesType)))  %>%
 
-  ggplot2::ggplot(ggplot2::aes(x = .data$speciesType, y = .data$A1, fill = .data$speciesType,
+  ggplot2::ggplot(ggplot2::aes(x = .data$speciesType, y = .data$a, fill = .data$speciesType,
                      color = .data$speciesType)) +
   ggdist::stat_halfeye(adjust = .7, width = .6, .width = 0,
                        justification = -.2, point_colour = NA) +
