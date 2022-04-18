@@ -1,6 +1,6 @@
 [![R-CMD-check](https://github.com/jafernandez01/cndcR/actions/workflows/check-release.yaml/badge.svg?branch=main)](https://github.com/jafernandez01/cndcR/actions/workflows/check-release.yaml)
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)(https://github.com/jafernandez01/cndcR/blob/main/LICENSE)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 # cndcR
 
