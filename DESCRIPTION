@@ -2,10 +2,13 @@ Package: cndcR
 Type: Package
 Title: Critical Nitrogen Dilution Curves in R
 Version: 0.1.0
-Author: Javier Fernandez
+Authors@R: c(
+    person("Javier", "Fernandez", , "jafernandez@ksu.edu", role = c("aut", "cre")))
 Maintainer: The package maintainer <jafernandez@ksu.edu>
-Description: The source data and R codes used for sensitivity analyses with the Bayesian method in "Minimum dataset characteristics for the determination of critical nitrogen dilution curves using field experiments"
-License: What license is it under?
+Description: The source data and R codes used for sensitivity analyses with the Bayesian method in 
+    "Minimum dataset characteristics for the determination of critical nitrogen dilution curves 
+    using field experiments".
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:

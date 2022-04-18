@@ -2,12 +2,14 @@
 #' @title
 #' Third sensitivity analysis
 #' @details
-#' See 'Examples' for the source code to obtain the given results. Briefly, a bootstrap procedure in which studies with s
-#' (where s = 1, 2, 3, 4, 5, and 6) number of samplings are sampled 100 times with replacement to create 100 new datasets.
-#' The Bayesian hierarchical model explained by Makowski et al. (2020) was fitted to each bootstrapped sample.
+#' See 'Examples' for the source code to obtain the given results. Briefly, a bootstrap procedure
+#' in which studies with s (where s = 1, 2, 3, 4, 5, and 6) number of samplings are sampled 100
+#' times with replacement to create 100 new datasets. The Bayesian hierarchical model explained by
+#' Makowski et al. (2020) was fitted to each bootstrapped sample.
 #' @description
-#' This function returns results from the 3rd sensitivity analysis in Fernandez et al.(2022): number of sampling times.
-#' Output is a tibble with posterior expectations and credibility intervals of a (A1) and b (A2) parameters of the CNDC.
+#' This function returns results from the 3rd sensitivity analysis in Fernandez et al.(2022):
+#' number of sampling times. Output is a tibble with posterior expectations and credibility
+#' intervals of a (A1) and b (A2) parameters of the CNDC.
 #'
 #' @note Parallel computation is recommended if running the example code.
 #'
@@ -23,14 +25,17 @@
 #'                                  group_by(Site_year) |>
 #'                                  filter(length(unique(Samp)) > 5) |>
 #'                                  nest() |>
-#'                                  mutate(sample = purrr::map(data, ~ filter(.x, Samp %in% sample(unique(.x$Samp), i, replace = F)))) |>
+#'                                  mutate(sample = purrr::map(data, ~ filter(.x,
+#'                                  Samp %in% sample(unique(.x$Samp), i, replace = F)))) |>
 #'                                  unnest(sample), simplify = F)
 #' }
 #'
-#' # Parameters and JAGS settings are defined for the MCMC (Markov Chain Monte Carlo) procedure to model the power function
-#' # of CNDC across sampling dates. Weakly-informative priors were defined following Makowski et al. (2020) and Ciampitti
-#' # et al. (2021). To facilitate computation of the sensitivity analyses, the algorithm was run with three chains of 20,000
-#' # iterations each (10,000 discarded as tuning and burn-in periods). The statistical model was fitted using the rjags:: library.
+#' # Parameters and JAGS settings are defined for the MCMC (Markov Chain Monte Carlo) procedure to
+#' # model the power function of CNDC across sampling dates. Weakly-informative priors were defined
+#' # following Makowski et al. (2020) and Ciampitti et al. (2021). To facilitate computation of the
+#' # sensitivity analyses, the algorithm was run with three chains of 20,000 iterations each
+#' # (10,000 discarded as tuning and burn-in periods). The statistical model was fitted using the
+#' # rjags:: library.
 #'
 #'     set.seed(500)
 #'     bootSamp_3 <- NULL
@@ -48,7 +53,8 @@
 #'
 #'       mcmcChain_3 <- NULL
 #'       for (d in seq(1, 100, 1)) {
-#'         Date <- as.numeric(as.factor(paste(dataSens_3[[i]][[d]]$Site_year, "_", dataSens_3[[i]][[d]]$Samp, sep = "")))
+#'         Date <- as.numeric(as.factor(paste(dataSens_3[[i]][[d]]$Site_year, "_",
+#'         dataSens_3[[i]][[d]]$Samp, sep = "")))
 #'
 #'         dataList <- list(
 #'           "W" = dataSens_3[[i]][[d]]$W,
@@ -112,9 +118,10 @@
 #'     }
 #'
 #'
-#' # Posterior probability distributions of *a* and *b* parameters are extracted for each bootstrapped sample
-#' # (i.e., extracting a total of 100 probability distributions). These distributions are then being averaged
-#' # to obtain posterior medians and credibility intervals from all the samples.
+#' # Posterior probability distributions of *a* and *b* parameters are extracted for each
+#' # bootstrapped sample (i.e., extracting a total of 100 probability distributions). These
+#' # distributions are then being averaged to obtain posterior medians and credibility intervals
+#' # from all the samples.
 #'
 #' fdataSens_3 <- foreach(i = seq(1, 6, 1)) %do% {
 #'
@@ -135,11 +142,12 @@
 #'
 #' fdataSens_3 <- bind_rows(fdataSens_3) |>
 #'   dplyr::group_by(Parameter, Method) |>
-#'   dplyr::summarise(lowCI = quantile(Value, 0.025), uppCI = quantile(Value, 0.975), mean = mean(Value))
+#'   dplyr::summarise(lowCI = quantile(Value, 0.025), uppCI = quantile(Value, 0.975),
+#'   mean = mean(Value))
 #'
 #' }
 NULL
 
 sensAnalysis_3 <- function() {
-  return(cndcR:::fdataSens_3)
+  return(eval(parse(text = "cndcR:::fdataSens_3")))
 }

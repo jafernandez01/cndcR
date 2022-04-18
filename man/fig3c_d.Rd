@@ -7,7 +7,7 @@
 fig3c_d()
 }
 \description{
-This function returns figure 3c and 3d in Fernandez et al.(2022): Sensitivity analyses for the number of
-N rates used to estimate a and b parameters of the CNDC in a case-study for maize, presenting bias
-and uncertainty (precision).
+This function returns figure 3c and 3d in Fernandez et al.(2022): Sensitivity analyses for the
+number of N rates used to estimate a and b parameters of the CNDC in a case-study for maize,
+presenting bias and uncertainty (precision).
 }

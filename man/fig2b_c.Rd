@@ -7,7 +7,7 @@
 fig2b_c()
 }
 \description{
-This function returns figure 2b and 2c in Fernandez et al.(2022): Sensitivity analyses for the number of
-experiments used to estimate a and b parameters of the CNDC in a case-study for maize, presenting bias
-and uncertainty (precision).
+This function returns figure 2b and 2c in Fernandez et al.(2022): Sensitivity analyses for the
+number of experiments used to estimate a and b parameters of the CNDC in a case-study for maize,
+presenting bias and uncertainty (precision).
 }

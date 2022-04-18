@@ -7,6 +7,6 @@
 fig3b()
 }
 \description{
-This function returns figure 3b in Fernandez et al.(2022): Frequency distribution of number of samplings used for fitting CNDC
-in literature.
+This function returns figure 3b in Fernandez et al.(2022): Frequency distribution of number of
+samplings used for fitting CNDC in literature.
 }

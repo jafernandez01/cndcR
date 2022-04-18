@@ -3,9 +3,9 @@
 #' @name cndcR
 #' @docType package
 #' @description
-#' The source data and R codes used for sensitivity analyses with the Bayesian
-#' method in "Minimum dataset characteristics for the determination of critical
-#' nitrogen dilution curves using field experiments"
+#' The source data and R codes used for sensitivity analyses with the Bayesian method in "Minimum
+#' dataset characteristics for the determination of critical nitrogen dilution curves using field
+#' experiments".
 NULL
 
 #' Case study on maize CNDC dataset.
@@ -74,4 +74,32 @@ NULL
 #' @name biblioCNDC
 #' @usage data(biblioCNDC)
 #' @format A data frame with 111 rows and 18 variables
+NULL
+
+#' Data for sensitivity analysis no. 1
+#'
+#' @docType data
+#' @keywords datasets
+#' @name fdataSens_1
+NULL
+
+#' Data for sensitivity analysis no. 2
+#'
+#' @docType data
+#' @keywords datasets
+#' @name fdataSens_2
+NULL
+
+#' Data for sensitivity analysis no. 3
+#'
+#' @docType data
+#' @keywords datasets
+#' @name fdataSens_3
+NULL
+
+#' Data for sensitivity analysis no. 4 and 5
+#'
+#' @docType data
+#' @keywords datasets
+#' @name fdataSens_4and5
 NULL

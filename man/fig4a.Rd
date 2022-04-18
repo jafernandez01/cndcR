@@ -7,5 +7,6 @@
 fig4a()
 }
 \description{
-This function returns figure 4a in Fernandez et al.(2022): Regression: Range of biomass of the CNDC across crop species.
+This function returns figure 4a in Fernandez et al.(2022): Regression: Range of biomass of the
+CNDC across crop species.
 }

@@ -4,14 +4,15 @@
 \alias{sensAnalysis_4and5}
 \title{Fourth and fifth sensitivity analysis}
 \description{
-This function returns results from the 4th and 5th sensitivity analysis in Fernandez et al.(2022): Using all data or only Wmax plateau
-achieved AND variance-weighted or unweighted data. Output is a tibble with posterior expectations and credibility intervals of a (A1) and
-b (A2) parameters of the CNDC.
+This function returns results from the 4th and 5th sensitivity analysis in Fernandez et al.
+(2022): Using all data or only Wmax plateau achieved AND variance-weighted or unweighted data.
+Output is a tibble with posterior expectations and credibility intervals of a (A1) and b (A2)
+parameters of the CNDC.
 }
 \details{
-See 'Examples' for the source code to obtain the given results. Briefly, the Bayesian hierarchical model explained
-by Makowski et al. (2020) was fitted to four combinations of datasets: using all data or only Wmax plateau
-achieved AND variance-weighted or unweighted data.
+See 'Examples' for the source code to obtain the given results. Briefly, the Bayesian
+hierarchical model explained by Makowski et al. (2020) was fitted to four combinations of
+datasets: using all data or only Wmax plateau achieved AND variance-weighted or unweighted data.
 }
 \note{
 Parallel computation is recommended if running the example code.
@@ -19,19 +20,22 @@ Parallel computation is recommended if running the example code.
 \examples{
 \dontrun{
 # Filter data by Wmax plateau achieved (or not):
-# 1.  For each sampling time within a study, relative biomass (RelW) was first calculated as the quotient
-# between biomass and the maximum biomass achieved across all N supply treatments. This procedure was
-# performed to standardize the levels of biomass across sampling dates.
+# 1.  For each sampling time within a study, relative biomass (RelW) was first calculated as the
+# quotient between biomass and the maximum biomass achieved across all N supply treatments.
+# This procedure was performed to standardize the levels of biomass across sampling dates.
 
-# 2.  Then, both linear and linear-plateau models were fitted to the biomass data across N rates with an
-# MCMC algorithm using the mcp:: library. Weakly-informative priors were defined for both models. The algorithm
-# was run with three chains of 15,000 iterations each (5,000 discarded as a burn-in period).
+# 2.  Then, both linear and linear-plateau models were fitted to the biomass data across N rates
+# with an MCMC algorithm using the mcp:: library. Weakly-informative priors were defined for
+# both models. The algorithm was run with three chains of 15,000 iterations each (5,000
+# discarded as a burn-in period).
 
-# 3.  Last, models were compared by calculating the widely application information criteria (WAIC). A sampling
-# time by study combination was defined as *"selected"* or *"excluded"* if the lowest WAIC was observed for a
-# *linear-plateau* or *linear* response of RelW with increasing N supply.
+# 3.  Last, models were compared by calculating the widely application information criteria
+# (WAIC). A sampling time by study combination was defined as "selected" or "excluded" if
+# the lowest WAIC was observed for a linear-plateau or linear response of RelW with
+# increasing N supply.
 
-# 4.  Predictions are extracted for both models (linear and linear-plateau) in case visual assessment is performed.
+# 4.  Predictions are extracted for both models (linear and linear-plateau) in case visual
+# assessment is performed.
 
 model_linp <- list(
   RelW ~ 1 + Nrates,
@@ -72,8 +76,10 @@ prior_null <- list(
 
       # loop for obtaining waic for both models --------------------
     dplyr::mutate(
-      WAICm1 = m1 |> purrr::map(purrr::possibly(~ mcp::waic(.x)$waic, otherwise = NA, quiet = TRUE)),
-      WAICm2 = m2 |> purrr::map(purrr::possibly(~ mcp::waic(.x)$waic, otherwise = NA, quiet = TRUE))
+      WAICm1 = m1 |> purrr::map(purrr::possibly(~ mcp::waic(.x)$waic, otherwise = NA,
+      quiet = TRUE)),
+      WAICm2 = m2 |> purrr::map(purrr::possibly(~ mcp::waic(.x)$waic, otherwise = NA,
+      quiet = TRUE))
     ) |>
 
       # loop for selecting model --------------------
@@ -95,14 +101,16 @@ prior_null <- list(
       ) |>
 
       # loop for extracting predictions for visual assessment --------------------
-    dplyr::mutate(ndat = data |> purrr::map(~ tidyr::expand_grid(Nrates = full_seq(.x$Nrates, 10, tol = 5)))) |>
-      dplyr::mutate(ndat = purrr::map2(.x = ndat, .y = m_sel, purrr::possibly(~ predict(object = .y, newdata = .x, probs = c(0.5)),
+    dplyr::mutate(ndat = data |> purrr::map(~ tidyr::expand_grid(Nrates = full_seq(.x$Nrates,
+    10, tol = 5)))) |>
+      dplyr::mutate(ndat = purrr::map2(.x = ndat, .y = m_sel,
+      purrr::possibly(~ predict(object = .y, newdata = .x, probs = c(0.5)),
                                                          otherwise = NA, quiet = TRUE
       )))
 
 
 # Filter data with variance information and combined 4th and 5th types of data:
-dataSens_5 <- Data |> filter_at(.vars = vars(Na_SE, W_SE), .vars_predicate = all_vars(!is.na(.)))
+dataSens_5 <- Data |> filter_at(.vars = vars(Na_SE, W_SE), .vars_predicate= all_vars(!is.na(.)))
 
 dataSens_4and5 <- list(
   dataSens_4 |>
@@ -112,10 +120,11 @@ dataSens_4and5 <- list(
   dataSens_5
 )
 
-# Parameters and JAGS settings are defined for the MCMC (Markov Chain Monte Carlo) procedure to model the power function
-# of CNDC across sampling dates. Weakly-informative priors were defined following Makowski et al. (2020) and Ciampitti
-# et al. (2021). The algorithm was run with three chains of 200,000 iterations each (100,000 discarded as tuning and
-# burn-in periods). The statistical model was fitted using the rjags:: library. Last, MCMC samples are extracted in a
+# Parameters and JAGS settings are defined for the MCMC (Markov Chain Monte Carlo) procedure to
+# model the power function of CNDC across sampling dates. Weakly-informative priors were defined
+# following Makowski et al. (2020) and Ciampitti et al. (2021). The algorithm was run with three
+# chains of 200,000 iterations each (100,000 discarded as tuning and burn-in periods). The
+# statistical model was fitted using the rjags:: library. Last, MCMC samples are extracted in a
 # vector for all samples and deviance information criterion (DIC) is obtained.
 
     # Specify parameters and JAGS settings
@@ -131,7 +140,8 @@ dataSens_4and5 <- list(
     mcmcChain_4 <- NULL
     dic_4 <- NULL
     for (d in seq(1, 2, 1)) {
-      Date <- as.numeric(as.factor(paste(dataSens_4and5[[d]]$Site_year, "_", dataSens_4and5[[d]]$Samp, sep = "")))
+      Date <- as.numeric(as.factor(paste(dataSens_4and5[[d]]$Site_year, "_",
+      dataSens_4and5[[d]]$Samp, sep = "")))
 
       dataList <- list(
         "W" = dataSens_4and5[[d]]$W,
@@ -206,7 +216,8 @@ model {
     mcmcChain_5 <- NULL
     dic_5 <- NULL
     for (d in seq(1, 2, 1)) {
-      Date <- as.numeric(as.factor(paste(dataSens_4and5[[d]]$Site_year, "_", dataSens_4and5[[d]]$Samp, sep = "")))
+      Date <- as.numeric(as.factor(paste(dataSens_4and5[[d]]$Site_year, "_",
+      dataSens_4and5[[d]]$Samp, sep = "")))
 
       dataList <- list(
         "W" = dataSens_4and5[[d]]$W,
@@ -273,8 +284,8 @@ model {
       dic_5[[d]] <- rjags::dic.samples(jagsModel_5, 10000)
     }
 
-# Posterior probability distributions of *a* and *b* parameters are extracted for the four combinations
-# of models (two for each sensitivity test, 4th and 5th).
+# Posterior probability distributions of *a* and *b* parameters are extracted for the four
+combinations of models (two for each sensitivity test, 4th and 5th).
 
 fdataSens_4and5 <- bind_rows(
   #' unweighted models

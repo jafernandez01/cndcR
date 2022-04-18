@@ -7,6 +7,6 @@
 fig1a()
 }
 \description{
-This function returns figure 1a in Fernandez et al.(2022): Frequency distribution of statistical method used for fitting CNDC
-in literature.
+This function returns figure 1a in Fernandez et al.(2022): Frequency distribution of statistical
+method used for fitting CNDC in literature.
 }

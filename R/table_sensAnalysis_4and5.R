@@ -18,7 +18,7 @@
 
 table1 <- function() {
 # Obtain medians of a and b parameters -------------------------------
-  parSens_4and5 <- cndcR:::fdataSens_4and5  %>%
+  parSens_4and5 <- eval(parse(text = "cndcR:::fdataSens_4and5"))  %>%
   dplyr::group_by(.data$Method, .data$Parameter)  %>%
   dplyr::summarise(Value = stats::median(.data$Value))
 
@@ -45,9 +45,9 @@ table1 <- function() {
   # calculate agreement between estimated and reference values for NNI
   dplyr::group_by(.data$Method)  %>%
   dplyr::summarise(
-    R2 = metrica::R2(ref, NNI), # r-squared
-    RMSE = metrica::RMSE(ref, NNI), # root mean square error
-    CCC = metrica::CCC(ref, NNI) # concordance correlation coefficient
+    R2 = metrica::R2(.data$ref, .data$NNI), # r-squared
+    RMSE = metrica::RMSE(.data$ref, .data$NNI), # root mean square error
+    CCC = metrica::CCC(.data$ref, .data$NNI) # concordance correlation coefficient
   )  %>%
   dplyr::mutate_if(is.double, .funs = ~ round(digits = 3, x = .))
 

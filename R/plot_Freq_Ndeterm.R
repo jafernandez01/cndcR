@@ -7,29 +7,29 @@
 
 fig1b <- function() {
 
-  data("biblioCNDC")
-  figFreq_Ndeterm <- biblioCNDC %>%
-  drop_na(NLabMethod) %>%
-  ggplot(aes(x = forcats::fct_infreq(NLabMethod) ) ) +
-  geom_bar(color = "#3d3c3c") +
-  geom_text(stat='count', aes(label=..count..), vjust=-0.3, fontface = 3) +
+  figFreq_Ndeterm <- cndcR::biblioCNDC %>%
+  tidyr::drop_na(.data$NLabMethod) %>%
+  ggplot2::ggplot(aes(x = forcats::fct_infreq(.data$NLabMethod) ) ) +
+  ggplot2::geom_bar(color = "#3d3c3c") +
+  ggplot2::geom_text(stat='count', ggplot2::aes(label=.data$..count..), vjust=-0.3, fontface = 3) +
 
-  ylab("Number of CNDCs") +
-  ggtitle("N determination method") + xlab(NULL) +
+  ggplot2::ylab("Number of CNDCs") +
+  ggplot2::ggtitle("N determination method") +
+  ggplot2::xlab(NULL) +
 
-  theme(panel.grid.minor = element_blank(),
-        panel.grid.major = element_line(color = "#e8e9eb"),
-        panel.background = element_rect(fill = "#f5f5f5"),
-        panel.border = element_rect(colour = "black", fill = NA),
+  ggplot2::theme(panel.grid.minor = ggplot2::element_blank(),
+        panel.grid.major = ggplot2::element_line(color = "#e8e9eb"),
+        panel.background = ggplot2::element_rect(fill = "#f5f5f5"),
+        panel.border = ggplot2::element_rect(colour = "black", fill = NA),
 
-        text = element_text(size = 14),
-        legend.title = element_blank(),
+        text = ggplot2::element_text(size = 14),
+        legend.title = ggplot2::element_blank(),
         legend.position = c(0.8,0.8),
-        legend.background = element_blank(),
+        legend.background = ggplot2::element_blank(),
 
-        axis.ticks.length=unit(-0.15, "cm"),
-        axis.text.x = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm")),
-        axis.text.y = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm"), size = 13))
+        axis.ticks.length=ggplot2::unit(-0.15, "cm"),
+        axis.text.x = ggplot2::element_text(margin=ggplot2::unit(c(0.5,0.5,0.5,0.5), "cm")),
+        axis.text.y = ggplot2::element_text(margin=ggplot2::unit(c(0.5,0.5,0.5,0.5), "cm"), size = 13))
 
   return(figFreq_Ndeterm)
 }

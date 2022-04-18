@@ -7,7 +7,7 @@
 fig3e_f()
 }
 \description{
-This function returns figure 3e and 3f in Fernandez et al.(2022): Sensitivity analyses for the number of
-sampling times used to estimate a and b parameters of the CNDC in a case-study for maize, presenting bias
-and uncertainty (precision).
+This function returns figure 3e and 3f in Fernandez et al.(2022): Sensitivity analyses for the
+number of sampling times used to estimate a and b parameters of the CNDC in a case-study for
+maize, presenting bias and uncertainty (precision).
 }

@@ -10,7 +10,7 @@
 fig5b_c <- function() {
 
 # Figures 5b-c for sensitivity analysis ----------------------
-  figSens_4and5 <- cndcR:::fdataSens_4and5  %>%
+  figSens_4and5 <- eval(parse(text = "cndcR:::fdataSens_4and5"))  %>%
   ggplot2::ggplot(ggplot2::aes(x = .data$Value, fill = .data$Method, color = .data$Method)) +
   ggplot2::geom_histogram(ggplot2::aes(y = .data$..density..), alpha = 0.5, position = "identity") +
   ggplot2::geom_density(alpha = .2) +
