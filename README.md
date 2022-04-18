@@ -1,5 +1,5 @@
 [![R-CMD-check](https://github.com/jafernandez01/cndcR/actions/workflows/check-release.yaml/badge.svg?branch=main)](https://github.com/jafernandez01/cndcR/actions/workflows/check-release.yaml)
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # cndcR
 
@@ -38,4 +38,4 @@ The determination of critical nitrogen (N) dilution curves (CNDCs) has been the 
 
 
 ## License
-This data package is distributed under the [CC-BY-4.0 License](https://creativecommons.org/licenses/by-sa/4.0/), see [LICENSE](https://github.com/jafernandez01/cndcR/blob/main/LICENSE.md) for more information.
+This data package is distributed under the [CC-BY-SA 4.0 License](https://creativecommons.org/licenses/by-sa/4.0/), see [LICENSE](https://github.com/jafernandez01/cndcR/blob/main/LICENSE.md) for more information.
