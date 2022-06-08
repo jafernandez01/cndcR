@@ -1,13 +1,13 @@
-#' @name fig4c
-#' @rdname fig4c
+#' @name fig4d
+#' @rdname fig4d
 #' @title
-#' Plot figure 4c from Fernandez et al. (2022)
+#' Plot figure 4d from Fernandez et al. (2022)
 #' @description
-#' This function returns figure 4c in Fernandez et al.(2022): Regression: minW vs. b coefficient of
+#' This function returns figure 4d in Fernandez et al.(2022): Regression: minW vs. b coefficient of
 #' the CNDC.
 #' @return figQuantile_Reg: ggplot object figure
 #' @export
-fig4c <- function() {
+fig4d <- function() {
 
   biblioCNDC <- cndcR::biblioCNDC %>% dplyr::rename(A2 = .data$b)
 

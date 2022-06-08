@@ -8,14 +8,15 @@
 fig1b <- function() {
 
   figFreq_Ndeterm <- cndcR::biblioCNDC %>%
-  tidyr::drop_na(.data$NLabMethod) %>%
-  ggplot2::ggplot(ggplot2::aes(x = forcats::fct_infreq(.data$NLabMethod) ) ) +
-  ggplot2::geom_bar(color = "#3d3c3c") +
+  dplyr::mutate(NLabMethod = factor(.data$NLabMethod, levels = c("Kjeldahl", "Dumas", "NIRS","Kjeldahl/dumas", "N/A"))) %>%
+  ggplot2::ggplot(ggplot2::aes(x = .data$NLabMethod ) ) +
+  ggplot2::geom_bar(fill = "#3d3c3c") +
   ggplot2::geom_text(stat='count', ggplot2::aes(label=.data$..count..), vjust=-0.3, fontface = 3) +
 
   ggplot2::ylab("Number of CNDCs") +
   ggplot2::ggtitle("N determination method") +
   ggplot2::xlab(NULL) +
+  ggplot2::scale_x_discrete(labels = c("Kjeldahl", "Dumas", "NIRS","Kjeldahl/\nDumas", "Not reported")) +
 
   ggplot2::theme(panel.grid.minor = ggplot2::element_blank(),
         panel.grid.major = ggplot2::element_line(color = "#e8e9eb"),

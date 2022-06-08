@@ -39,4 +39,4 @@ Suggests:
 Remotes: github::adriancorrendo/metrica
 Depends: 
     R (>= 2.10)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
