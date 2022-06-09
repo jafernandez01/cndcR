@@ -12,6 +12,7 @@ fig4c <- function() {
   biblioCNDC <- cndcR::biblioCNDC %>% dplyr::rename(A1 = .data$a)
 
   #m_a1 = lm(A1 ~ minW, data = biblioCNDC)
+  requireNamespace("nlraa")
   m_a1 <- quantreg::nlrq(A1~SSlinp(minW, a ,b,xs) , data = biblioCNDC, tau = 0.05, start = c(a = 0, b = 1, xs = 1) )
 
   ndat_a1 <- expand.grid(minW = seq(min(biblioCNDC$minW, na.rm = T),
