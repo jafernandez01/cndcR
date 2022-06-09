@@ -44,7 +44,7 @@ table1 <- function() {
   tidyr::pivot_longer(names_to = "Method", values_to = "NNI", cols = c(5:8)) %>%
   # calculate agreement between estimated and reference values for NNI
   dplyr::group_by(.data$Method) %>%
-  cndcR::multi_metrics(ref,NNI) %>%
+  cndcR::multi_metrics(.data$ref,.data$NNI) %>%
   dplyr::mutate_if(is.double, .funs = ~ round(digits = 3, x = .))
 
 #' @examples

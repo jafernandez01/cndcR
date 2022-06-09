@@ -2,8 +2,11 @@
 % Please edit documentation in R/table_sensAnalysis_4and5.R
 \name{table1}
 \alias{table1}
+\alias{multi_metrics}
 \title{Retrieve table 1 from Fernandez et al. (2022)}
 \usage{
+multi_metrics(data, truth, estimate, na_rm = TRUE, case_weights = NULL, ...)
+
 table1()
 }
 \description{
