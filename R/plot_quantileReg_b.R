@@ -7,9 +7,16 @@
 #' the CNDC.
 #' @return figQuantile_Reg: ggplot object figure
 #' @export
+
 fig4d <- function() {
 
   biblioCNDC <- cndcR::biblioCNDC %>% dplyr::rename(A2 = .data$b)
+
+  if (!require(nlraa)) {
+
+    stop("nlraa not installed")
+
+  } else {
 
   #m_a1 = lm(A2 ~ minW, data = biblioCNDC)
   m_a2 <- quantreg::nlrq(A2~SSlinp(minW, a ,b,xs) , data = biblioCNDC, tau = 0.05 )
@@ -44,4 +51,5 @@ fig4d <- function() {
                                             size = 13))
 
   return(figQuantile_Reg)
+  }
 }
