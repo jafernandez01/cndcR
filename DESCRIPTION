@@ -32,11 +32,11 @@ Imports:
     ggdist,
     gghalves,
     quantreg,
-    forcats,
-    nlraa
+    forcats
 Suggests:
     testthat
 Remotes: github::adriancorrendo/metrica
-Depends: 
+Depends:
+    nlraa,
     R (>= 2.10)
 RoxygenNote: 7.2.0
