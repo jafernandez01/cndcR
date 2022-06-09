@@ -2,7 +2,7 @@ citHeader("To cite cndcR in publications use:")
 
 citEntry(
   entry    = "Article",
-  title    = "Minimum dataset characteristics for the determination of critical nitrogen dilution curves using field experiments",
+  title    = "Dataset characteristics for the determination of critical nitrogen dilution curves: from the past to new guidelines",
   author   = c(
     person(given = "Javier A.", family = "Fernandez", email = "jafernandez@ksu.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-4862-2461") ),
     person(given = "Emmanuela", family = "van Versendaal", email = "evanversendaal@ksu.edu", role = c("aut") ),
@@ -15,6 +15,6 @@ citEntry(
   year     = "2022",
   volume   = "in revision",
   textVersion = paste(
-"Fernandez J.A., van Versendaal E., Lacasa J., Makowski D., Lemaire G., Ciampitti I.A. 2022. Minimum dataset characteristics for the determination of critical nitrogen dilution curves using field experiments. European Journal of Agronomy, in revision."
+"Fernandez J.A., van Versendaal E., Lacasa J., Makowski D., Lemaire G., Ciampitti I.A. 2022. Dataset characteristics for the determination of critical nitrogen dilution curves: from the past to new guidelines. European Journal of Agronomy, in revision."
   )
 )

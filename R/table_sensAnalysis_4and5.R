@@ -15,17 +15,17 @@
 #' This function returns values for table 1 in Fernandez et al.(2022): Evaluation of four critical
 #' nitrogen dilution curves (CNDC) models fitted with the Bayesian approach using four types of
 #' datasets: (All data or only Wmax achieved data) ✕ (unweighted or variance-weighted data model).
+multi_metrics <- yardstick::metric_set(yardstick::rsq,yardstick::rmse, yardstick::ccc)
 
 table1 <- function() {
+
 # Obtain medians of a and b parameters -------------------------------
   parSens_4and5 <- eval(parse(text = "cndcR:::fdataSens_4and5"))  %>%
   dplyr::group_by(.data$Method, .data$Parameter)  %>%
   dplyr::summarise(Value = stats::median(.data$Value))
 
 # Testing CNDCs on a validation data_base ---------------------------
-  metSens_4and5 <- readxl::read_xlsx("data-raw/maize_validationset.xlsx", sheet = 1)  %>%
-  dplyr::mutate(W = .data$W_kg_ha * .001)  %>%
-  dplyr::filter(.data$W > 1)  %>%
+  metSens_4and5 <- cndcR::validationSet  %>%
   tidyr::expand_grid(Method = c("Unweighted-Wmax", "Unweighted-Wall",
                                 "Weighted-Wmax", "Weighted-Wall", "ref"))  %>%
   # computing NNI from reference and estimated curve
@@ -41,14 +41,10 @@ table1 <- function() {
   dplyr::filter(.data$NNI < 1.8)  %>%  # removing unrealistic outliers of NNI
   tidyr::pivot_wider(names_from = .data$Method, values_from = .data$NNI,
                        id_cols = c(.data$Id, .data$Paper, .data$W, .data$`N(%)`))  %>%
-  tidyr::pivot_longer(names_to = "Method", values_to = "NNI", cols = c(5:8))  %>%
+  tidyr::pivot_longer(names_to = "Method", values_to = "NNI", cols = c(5:8)) %>%
   # calculate agreement between estimated and reference values for NNI
-  dplyr::group_by(.data$Method)  %>%
-  dplyr::summarise(
-    R2 = metrica::R2(.data$ref, .data$NNI), # r-squared
-    RMSE = metrica::RMSE(.data$ref, .data$NNI), # root mean square error
-    CCC = metrica::CCC(.data$ref, .data$NNI) # concordance correlation coefficient
-  )  %>%
+  dplyr::group_by(.data$Method) %>%
+  cndcR::multi_metrics(ref,NNI) %>%
   dplyr::mutate_if(is.double, .funs = ~ round(digits = 3, x = .))
 
 #' @examples

@@ -76,6 +76,15 @@ NULL
 #' @format A data frame with 111 rows and 18 variables
 NULL
 
+#' Validation data of four studies in maize used in Table 1 comparing CNDC estimations
+#'
+#' @docType data
+#' @keywords datasets
+#' @name validationSet
+#' @usage data(validationSet)
+#' @format A data frame
+NULL
+
 #' Data for sensitivity analysis no. 1
 #'
 #' @docType data

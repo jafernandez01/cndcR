@@ -11,6 +11,12 @@ fig4c <- function() {
 
   biblioCNDC <- cndcR::biblioCNDC %>% dplyr::rename(A1 = .data$a)
 
+  if (!require(nlraa)) {
+
+    stop("nlraa not installed")
+
+  } else {
+
   #m_a1 = lm(A1 ~ minW, data = biblioCNDC)
   m_a1 <- quantreg::nlrq(A1~SSlinp(minW, a ,b,xs) , data = biblioCNDC, tau = 0.05, start = c(a = 0, b = 1, xs = 1) )
 
@@ -44,4 +50,5 @@ fig4c <- function() {
                                                        size = 13))
 
   return(figQuantile_Reg)
+  }
 }

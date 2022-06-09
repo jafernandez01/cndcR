@@ -41,7 +41,11 @@ biblioCNDC <- readxl::read_xlsx("data-raw/bibliographic_dataset.xlsx",
                                        "text", "text", "text", "skip")) %>%
   filter(studyType == "CAL")
 
+validationSet <- readxl::read_xlsx("data-raw/maize_validationset.xlsx", sheet = 1)  %>%
+  dplyr::mutate(W = .data$W_kg_ha * .001)  %>%
+  dplyr::filter(.data$W > 1)
 
 # save the data
 #usethis::use_data(biblioCNDC, overwrite = TRUE)
 #usethis::use_data(Data, overwrite = TRUE)
+#usethis::use_data(validationSet, overwrite = TRUE)

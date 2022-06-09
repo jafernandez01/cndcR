@@ -1,7 +1,7 @@
 Package: cndcR
 Type: Package
 Title: Critical Nitrogen Dilution Curves in R
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: c(
     person(given = "Javier A.", family = "Fernandez", email = "jafernandez@ksu.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-4862-2461") ),
     person(given = "Emmanuela", family = "van Versendaal", email = "evanversendaal@ksu.edu", role = c("aut") ),
@@ -11,8 +11,8 @@ Authors@R: c(
     person(given = "Ignacio A.", family = "Ciampitti", email = "ciampitti@ksu.edu", role = c("aut") )
     )
 Maintainer: The package maintainer <jafernandez@ksu.edu>
-Description: cndcR is an R package of the manuscript "Minimum dataset characteristics for the 
-    determination of critical nitrogen dilution curves using field experiments" The package contains 
+Description: cndcR is an R package of the manuscript "Dataset characteristics for the determination 
+    of critical nitrogen dilution curves: from the past to new guidelines" The package contains 
     the source data and R codes used for sensitivity analyses to fit critical N dilution curves with 
     the Bayesian method.
 License: CC BY-SA 4.0 + file LICENSE
@@ -33,7 +33,8 @@ Imports:
     gghalves,
     quantreg,
     forcats,
-    nlraa
+    nlraa,
+    yardstick
 Suggests:
     testthat
 Remotes: github::adriancorrendo/metrica
