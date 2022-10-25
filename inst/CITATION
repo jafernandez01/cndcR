@@ -1,4 +1,4 @@
-citHeader("To cite cndcR in publications use:")
+citHeader("To cite cndcR in publications, please cite the publication included below (first entry). If you use R-code or data from cndcR, please, also cite the repository included below (second entry).")
 
 citEntry(
   entry    = "Article",
@@ -11,10 +11,26 @@ citEntry(
     person(given = "Gilles", family = "Lemaire", email = "gilles.lemaire.inra@gmail.com", role = c("aut") ),
     person(given = "Ignacio A.", family = "Ciampitti", email = "ciampitti@ksu.edu", role = c("aut") )
     ),
+  doi      = "10.1016/j.eja.2022.126568",
   journal  = "European Journal of Agronomy",
   year     = "2022",
-  volume   = "in revision",
+  volume   = "139",
+  pages    = "126568",
   textVersion = paste(
-"Fernandez J.A., van Versendaal E., Lacasa J., Makowski D., Lemaire G., Ciampitti I.A. 2022. Dataset characteristics for the determination of critical nitrogen dilution curves: from the past to new guidelines. European Journal of Agronomy, in revision."
+"Fernandez J.A., van Versendaal E., Lacasa J., Makowski D., Lemaire G., Ciampitti I.A. (2022). Dataset characteristics for the determination of critical nitrogen dilution curves: from the past to new guidelines. European Journal of Agronomy, 139, 126568."
+  )
+)
+
+citEntry(
+  entry    = "Manual",
+  title    = "cndcR: R package version v1.0.0",
+  author   = c(
+    person(given = "Javier A.", family = "Fernandez", email = "jafernandez@ksu.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-4862-2461") ),
+    ),
+  doi      = "10.5281/zenodo.6468142",
+  url      = "https://github.com/jafernandez01/cndcR/",
+  year     = "2022",
+  textVersion = paste(
+"Fernandez J.A. (2022). cndcR: R package version v1.0.0 (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.6468142"
   )
 )
